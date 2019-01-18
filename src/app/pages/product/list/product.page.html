@@ -1,0 +1,45 @@
+<div class="container" *ngIf=validUrl>
+  <h3 class="mt-4">
+    <span class="text-capitalize">{{type | i18nextFormat }}
+      <a [routerLink]="['./create']" class="ml-2 btn btn-primary btn-sm">{{ 'New Product' | i18nextFormat }}</a>
+    </span>
+  </h3>
+
+  <div *ngIf="products && !products.length" class="text-center mt-5">
+    {{ 'No Product Found' | i18nextFormat }}
+  </div>
+
+  <div class="product-list clearfix">
+    <div *ngFor="let product of products" class="float-left m-2">
+      <div class="c-product">
+        <div class="image">
+          <img [hidden]="!product.image" [src]="product.image" alt="portfolio" style="max-width: 100%" />
+        </div>
+        <div class="description">
+          <h4 class="item_name">{{product.name}}</h4>
+
+          <div class="product__costs">
+
+            <span class="c-price">
+              {{product.price}}&euro;
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <a [routerLink]="'/dashboard/' + product.type + '/' + product.id" class="text-success">
+          <i class="fa fa-edit"></i>
+        </a>
+        <a class="text-danger cp ml-3" (click)="deleteProduct(product)">
+          <i class="fa fa-trash"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!validUrl" class="error-page">
+  <img src="./assets/img/error404.png"/>
+  <h1 class="invalid-page">404 </h1>
+  <h2 class="invalid-page2">Url does not Exist!</h2>
+</div>

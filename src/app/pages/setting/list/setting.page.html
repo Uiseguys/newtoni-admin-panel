@@ -1,0 +1,60 @@
+<div class="container">
+  <h3 class="mb-4">
+    <span class="text-capitalize">Settings</span>
+  </h3>
+  <form class="form-horizontal ng-pristine ng-valid" autocomplete="off">
+    <fieldset>
+      <legend>{{ 'Netlify' | i18nextFormat }}</legend>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ 'Preview Hook' | i18nextFormat }}</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="previewBuildHook" [(ngModel)]="settings.previewBuildHook" autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ 'Live Hook' | i18nextFormat }}</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="liveBuildHook" [(ngModel)]="settings.liveBuildHook" autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="form-group mt-3 row">
+        <div class="col-sm-10 offset-sm-2 d-flex">
+          <button type="button" class="btn btn-success" (click)="updateNetlifySetting()">{{ 'Update' | i18nextFormat }}</button>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>{{ 'Email' | i18nextFormat }}</legend>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ 'From' | i18nextFormat }}</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" name="emailSettingFrom" [(ngModel)]="emailSetting.from" autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ 'To' | i18nextFormat }}</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" name="emailSettingTo" [(ngModel)]="emailSetting.to" autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ 'Cc' | i18nextFormat }}</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" name="emailSettingCC" [(ngModel)]="emailSetting.cc" autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="form-group mt-3 row">
+        <div class="col-sm-10 offset-sm-2 d-flex">
+          <button type="button" class="btn btn-success" (click)="updateEmailSetting()">{{ 'Update' | i18nextFormat }}</button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

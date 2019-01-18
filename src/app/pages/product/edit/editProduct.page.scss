@@ -1,0 +1,15 @@
+app-createWine-page {
+  .clock {
+    float: left;
+    width: auto;
+    height: 116px;
+    margin: 2em auto !important;
+
+    .flip-clock-divider .flip-clock-label {
+      color: white;
+    }
+  }
+  .clock-wrapper {
+    display: inline-block;
+  }
+}

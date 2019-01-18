@@ -1,0 +1,5 @@
+<div class="container">
+  <h3 class="my-5">{{ 'Update' | i18nextFormat }} </h3>
+
+  <productForm [isCreate]="false" (onSubmit)="handleSubmit($event)" [initialValue]="product"></productForm>
+</div>
