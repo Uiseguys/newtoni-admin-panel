@@ -11,23 +11,13 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
           <div class="dropdown-menu">
-            <!-- <a class="dropdown-item" [routerLink]="'/dashboard/red'">{{ 'Red' | i18nextFormat }}</a>
-            <a class="dropdown-item" [routerLink]="'/dashboard/white'">{{ 'White' | i18nextFormat }}</a>
-            <a class="dropdown-item" [routerLink]="'/dashboard/rose'">{{ 'Rose' | i18nextFormat }}</a>
-            <a class="dropdown-item" [routerLink]="'/dashboard/champagne'">{{ 'Champagne' | i18nextFormat }}</a> -->
-            
-            <a class="dropdown-item pointer" *ngFor="let route of category" (click)="openUrl(route)">{{ route.name | i18nextFormat }}</a>
+                      <a class="dropdown-item pointer" *ngFor="let route of category" (click)="openUrl(route)">{{ route.name | i18nextFormat }}</a>
           </div>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/dashboard/packaging'">{{ 'Packaging' | i18nextFormat }}</a>
-        </li> -->
+    
         <li class="nav-item" [routerLinkActive]="['active']">
           <a class="nav-link" [routerLink]="'/dashboard/payments'">{{ 'Payments' | i18nextFormat }}</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/dashboard/templates'">{{ 'Templates' | i18nextFormat }}</a>
-        </li> -->
         <li class="nav-item">
           <a class="nav-link" [routerLink]="'/dashboard/images'">{{ 'Images' | i18nextFormat }}</a>
         </li>
