@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   siteUrl: '',
-  apiUrl: 'https://dannygrassow-api.herokuapp.com',
+  apiUrl: 'https://newtoni-api.herokuapp.com',
   pdfUrl: 'https://www.pdf-aas.io'
   };
   

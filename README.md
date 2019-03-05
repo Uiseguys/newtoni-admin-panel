@@ -30,7 +30,7 @@ You can run app in product version `ng serve --prod`,
     export const environment = {
       production: true,
       siteUrl: '',
-      apiUrl: 'https://dev-schneckenhof-api.herokuapp.com/api',
+      apiUrl: 'https://newtoni-api.herokuapp.com',
       pdfUrl: 'https://www.pdf-aas.io',
     };
 
