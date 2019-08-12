@@ -3,7 +3,7 @@ Angular based admin panel accessing/managing the newtoni-api
 
 is hooked up to netlify deploy on every push to the 'develop' branch
 target is here:
-grassow-admin-panel.netlify.com
+newtoni-admin-panel.netlify.com
 
 ## How to start
 
@@ -11,8 +11,8 @@ grassow-admin-panel.netlify.com
 
 In order to start the seed use:
 
-    $ git clone https://github.com/Uiseguys/grassow-admin-panel/
-    $ cd grassow-admin-panel
+    $ git clone https://github.com/Uiseguys/newtoni-admin-panel/
+    $ cd newtoni-admin-panel
     # install angular-cli
     $ npm install -g @angular/cli
     # install the project's dependencies
@@ -21,7 +21,7 @@ In order to start the seed use:
 
 ## Configuration
 
-### api, pdf and notlify webhooks
+### api and netlify webhooks
 
 There are 2 files(environment.prod.ts, environment.ts) if you look inside src/environments.
 environment.ts is for develop and environment.prod.ts is for product version.
@@ -30,14 +30,11 @@ You can run app in product version `ng serve --prod`,
     export const environment = {
       production: true,
       siteUrl: '',
-      apiUrl: 'https://newtoni-api.herokuapp.com',
-      pdfUrl: 'https://www.pdf-aas.io',
+      apiUrl: 'https://newtoni-api.herokuapp.com'
     };
 
 * apiUrl
-  The site url of **[Danny Grassow-api](https://github.com/Uiseguys/grassow-admin-panel)**.
-* pdfUrl
-  We use [carbone](https://carbone.io/) to generate PDF.
+  The site url of **[newtoni-api](https://github.com/Uiseguys/newtoni-api)**.
 
 ## Build
 
