@@ -1,13 +1,13 @@
 /**
  * Created by S.Angel on 4/2/2017.
  */
-import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/throw';
-import { Api } from './api.service';
-import { Observable, Subject } from 'rxjs';
-import { environment as ENV } from '../../../environments/environment';
+import { Injectable } from "@angular/core";
+import "rxjs/add/operator/catch";
+import "rxjs/add/operator/map";
+import "rxjs/add/observable/throw";
+import { Api } from "./api.service";
+import { Observable, Subject } from "rxjs";
+import { environment as ENV } from "../../../environments/environment";
 
 @Injectable()
 export class ClientApiService extends Api {
@@ -16,23 +16,23 @@ export class ClientApiService extends Api {
 
   // ---------- auth api ----------
   login(info) {
-    return this.post('/CustomUsers/login', info);
+    return this.post("/custom-users/login", info);
   }
 
   register(info) {
-    return this.post('/CustomUsers', info);
+    return this.post("/custom-users", info);
   }
 
   logout() {
-    return this.post('/CustomUsers/logout', {});
+    return this.post("/custom-users/logout", {});
   }
 
   getUserInfo(id) {
     const filter = {
-      include: ['roles']
+      include: ["roles"]
     };
 
-    return this.get(`/CustomUsers/${id}?filter=${JSON.stringify(filter)}`);
+    return this.get(`/custom-users/${id}?filter=${JSON.stringify(filter)}`);
   }
 
   generatePDF(template, data) {

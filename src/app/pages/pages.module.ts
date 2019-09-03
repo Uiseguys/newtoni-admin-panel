@@ -8,6 +8,13 @@ import { LayoutModule } from '../layout/layout.module';
 import { DashboardLayoutComponent } from '../layout/dashboardlayout/dashboardlayout.component';
 import { LoginPage } from './login/login.page';
 import { RegisterPage } from './register/register.page';
+import { EditionsComponent } from './editions/editions.component';
+import { NewsComponent } from './news/news.component';
+import { PublicationsComponent } from './publications/publications.component';
+import { PublicationsFormComponent } from './publications/publications-form/publications-form.component';
+import { CreateComponent } from './publications/create/create.component';
+import { EditComponent } from './publications/edit/edit.component';
+import { ListComponent } from './publications/list/list.component';
 
 export const routes = [
   {
@@ -44,7 +51,7 @@ export const routes = [
 
 @NgModule({
   imports: [SharedModule, LayoutModule, RouterModule.forRoot(routes)],
-  declarations: [LoginPage, RegisterPage],
+  declarations: [LoginPage, RegisterPage, EditionsComponent, NewsComponent, PublicationsComponent, PublicationsFormComponent, CreateComponent, EditComponent, ListComponent],
   providers: [],
   exports: [RouterModule]
 })
