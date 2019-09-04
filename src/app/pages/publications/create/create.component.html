@@ -1,3 +1,11 @@
-<p>
-  create works!
-</p>
+<div class="container">
+  <h3 class="my-5">
+    {{ "Create" | i18nextFormat }}
+    <span class="text-capitialize">{{ type | i18nextFormat }}</span>
+  </h3>
+
+  <app-publications-form
+    [isCreate]="true"
+    (onSubmit)="handleSubmit($event)"
+  ></app-publications-form>
+</div>

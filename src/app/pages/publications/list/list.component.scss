@@ -1,5 +1,5 @@
-app-product-page {
-  .c-product {
+app-list {
+  .c-publication {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -28,7 +28,7 @@ app-product-page {
       min-height: 140px;
       margin-top: 30px;
     }
-    .product__vintage {
+    .publication__vintage {
       position: absolute;
       top: 0px;
       width: 100%;
@@ -43,10 +43,10 @@ app-product-page {
     padding: 25px;
     width: 42%;
     align-items: center;
-   
+
     text-align: center;
     margin: 0 auto;
-    img{
+    img {
       width: 150px;
       padding-bottom: 10px;
     }
@@ -54,7 +54,6 @@ app-product-page {
       text-align: center;
       font-size: 67px;
       color: #ec4040;
-     
     }
     .invalid-page2 {
       text-align: center;

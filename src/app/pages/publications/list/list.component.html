@@ -1,3 +1,53 @@
-<p>
-  list works!
-</p>
+<div class="container" *ngIf="validUrl">
+  <h3 class="mt-4">
+    <span class="text-capitalize"
+      >{{ type | i18nextFormat }}
+      <a [routerLink]="['./create']" class="ml-2 btn btn-primary btn-sm">{{
+        "New Product" | i18nextFormat
+      }}</a>
+    </span>
+  </h3>
+
+  <div *ngIf="publications && !publications.length" class="text-center mt-5">
+    {{ "No Publication Found" | i18nextFormat }}
+  </div>
+
+  <div class="product-list clearfix">
+    <div *ngFor="let publication of publications" class="float-left m-2">
+      <div class="c-publication">
+        <div class="image">
+          <img
+            [hidden]="!publication.image"
+            [src]="publication.image"
+            alt="portfolio"
+            style="max-width: 100%"
+          />
+        </div>
+        <div class="description">
+          <h4 class="item_name">{{ publication.name }}</h4>
+
+          <div class="publication__costs">
+            <span class="c-price"> {{ publication.price }}&euro; </span>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <a
+          [routerLink]="'/dashboard/' + publication.type + '/' + publication.id"
+          class="text-success"
+        >
+          <i class="fa fa-edit"></i>
+        </a>
+        <a class="text-danger cp ml-3" (click)="deletePublication(publication)">
+          <i class="fa fa-trash"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!validUrl" class="error-page">
+  <img src="./assets/img/error404.png" />
+  <h1 class="invalid-page">404</h1>
+  <h2 class="invalid-page2">Url does not Exist!</h2>
+</div>
