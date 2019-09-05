@@ -1,6 +1,6 @@
 {
-  "name": "Newtoni Admin Panel",
-  "version": "0.3.0",
+  "name": "newtoni-admin-panel",
+  "version": "0.4.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
