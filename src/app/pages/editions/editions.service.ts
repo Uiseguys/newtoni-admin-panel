@@ -20,7 +20,7 @@ export class EditionsService {
 
   getAll() {
     const filter = {
-      order: ["date", "priority ASC"]
+      order: "id DESC"
     };
     return this.api.get(`/editions?filter=${JSON.stringify(filter)}`);
   }

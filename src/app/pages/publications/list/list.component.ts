@@ -26,33 +26,8 @@ export class ListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.type = params.type.split("-").join(" ");
-      let category = [
-        { name: "Artist Books", link: "Artist-Books" },
-        { name: "Magazine", link: "Magazine" },
-        { name: "New Media", link: "New-Media" },
-        { name: "Photography", link: "Photography" },
-        { name: "Graphic", link: "Graphic" }
-      ];
-
-      let isValid = false;
-      // Check for the valid Routes
-      for (let i = 0; i < category.length; i++) {
-        if (category[i].name == this.type) {
-          isValid = true;
-          break;
-        }
-      }
-      if (isValid === false) {
-        this.validUrl = false;
-        // this.router.navigate(['/'])
-      } else {
-        this.validUrl = true;
-        this.api.getAll().subscribe(res => {
-          this.publications = res;
-        });
-      }
+    this.api.getAll().subscribe(res => {
+      this.publications = res;
     });
   }
 
