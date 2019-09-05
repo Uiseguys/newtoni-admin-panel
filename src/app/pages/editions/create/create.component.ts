@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ToasterService } from "angular2-toaster";
 
-import { PublicationsService } from "../publications.service";
+import { EditionsService } from "../editions.service";
 
 @Component({
   selector: "app-create",
@@ -13,7 +13,7 @@ export class CreateComponent implements OnInit {
   constructor(
     public router: Router,
     private toasterService: ToasterService,
-    private api: PublicationsService
+    private api: EditionsService
   ) {}
 
   ngOnInit() {}
@@ -36,17 +36,13 @@ export class CreateComponent implements OnInit {
       values.no = 0;
     }
     const success = () => {
-      this.toasterService.popAsync(
-        "success",
-        "",
-        "Publication has been created"
-      );
+      this.toasterService.popAsync("success", "", "Edition has been created");
     };
 
-    this.api.createPublication(values).subscribe(
+    this.api.createEdition(values).subscribe(
       res => {
         success();
-        this.router.navigate(["/dashboard/publications"]);
+        this.router.navigate(["/dashboard/editions"]);
       },
       res => {
         const body = JSON.parse(res._body);

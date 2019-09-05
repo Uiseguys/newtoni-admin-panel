@@ -23,13 +23,19 @@ export const routes = [
       user: AuthGuardResolve
     },
     children: [
-      { path: "", redirectTo: "/dashboard/publications", pathMatch: "full" },
-
+      { path: "", redirectTo: "/dashboard/news", pathMatch: "full" },
       { path: "payments", loadChildren: "./order/order.module#OrderModule" },
-
       {
         path: "publications",
         loadChildren: "./publications/publications.module#PublicationsModule"
+      },
+      {
+        path: "news",
+        loadChildren: "./news/news.module#NewsModule"
+      },
+      {
+        path: "editions",
+        loadChildren: "./editions/editions.module#EditionsModule"
       },
       {
         path: "images",

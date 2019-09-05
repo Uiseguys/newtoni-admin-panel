@@ -1,0 +1,64 @@
+app-list {
+  .c-publication {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 250px;
+    height: 400x;
+    flex-basis: 12%;
+    padding: 2%;
+    background-color: #fff;
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25);
+    color: #333;
+    &:hover {
+      text-decoration: none;
+    }
+    .image {
+      min-height: 240px;
+      img {
+        display: block;
+        margin: 0 auto;
+        max-height: 25vh;
+      }
+    }
+    .description {
+      padding-top: 25px;
+      text-align: center;
+      position: relative;
+      min-height: 140px;
+      margin-top: 30px;
+    }
+    .publication__vintage {
+      position: absolute;
+      top: 0px;
+      width: 100%;
+    }
+    // .product__costs {
+    //   position: absolute;
+    //   bottom: -20px;
+    //   width: 100%;
+    // }
+  }
+  .error-page {
+    padding: 25px;
+    width: 42%;
+    align-items: center;
+
+    text-align: center;
+    margin: 0 auto;
+    img {
+      width: 150px;
+      padding-bottom: 10px;
+    }
+    .invalid-page {
+      text-align: center;
+      font-size: 67px;
+      color: #ec4040;
+    }
+    .invalid-page2 {
+      text-align: center;
+      font-size: 22px;
+      color: black;
+    }
+  }
+}

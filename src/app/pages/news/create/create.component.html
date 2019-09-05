@@ -2,11 +2,11 @@
 <div class="container">
   <h3 class="my-5">
     {{ "Create" | i18nextFormat }}
-    <span class="text-capitialize">{{ "Publication" | i18nextFormat }}</span>
+    <span class="text-capitialize">{{ "News" | i18nextFormat }}</span>
   </h3>
 
-  <app-publications-form
+  <app-news-form
     [isCreate]="true"
     (onSubmit)="handleSubmit($event)"
-  ></app-publications-form>
+  ></app-news-form>
 </div>

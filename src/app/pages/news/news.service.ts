@@ -6,11 +6,11 @@ import { Injectable } from "@angular/core";
 import { Api } from "../../services/api/api.service";
 
 @Injectable()
-export class PublicationsService {
+export class NewsService {
   constructor(private api: Api) {}
 
   // ---------- product api ----------
-  getPublicationsCount(type) {
+  getNewsCount(type) {
     const filter = {
       type
     };
@@ -25,7 +25,7 @@ export class PublicationsService {
     return this.api.get(`/publications?filter=${JSON.stringify(filter)}`);
   }
 
-  getPublications(date) {
+  getNews(date) {
     const filter = {
       order: "priority ASC",
       where: {
@@ -35,7 +35,7 @@ export class PublicationsService {
     return this.api.get(`/publications?filter=${JSON.stringify(filter)}`);
   }
 
-  searchPublications(key) {
+  searchNews(key) {
     const filter = {
       where: {
         name: { like: `${encodeURIComponent(key)}%25` }
@@ -45,22 +45,22 @@ export class PublicationsService {
     return this.api.get(`/publications?filter=${JSON.stringify(filter)}`);
   }
 
-  createPublication(info) {
+  createNews(info) {
     return this.api.post("/publications", info);
   }
 
-  updatePublication(id, info) {
+  updateNews(id, info) {
     return this.api.patch(`/publications/${id}`, info);
   }
 
-  getPublication(id) {
+  getNewss(id) {
     const filter = {
       include: ["packaging"]
     };
     return this.api.get(`/publications/${id}`);
   }
 
-  deletePublication(id) {
+  deleteNews(id) {
     return this.api.delete(`/publications/${id}`);
   }
 }

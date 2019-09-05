@@ -1,0 +1,210 @@
+<form
+  class="form-horizontal ng-pristine ng-valid"
+  [formGroup]="form"
+  (submit)="handleSubmit($event)"
+  autocomplete="off"
+>
+  <div class="p-3" style="border: 2px solid #f7f7f9;">
+    <div class="form-group row">
+      <label for="name" class="col-sm-2 col-form-label">
+        {{ "Name" | i18nextFormat }}
+      </label>
+      <div class="col-sm-10">
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          formControlName="name"
+          autocomplete="off"
+        />
+        <div
+          class="text-danger"
+          *ngIf="
+            form.controls['name'].hasError('required') &&
+            (form.controls['name'].dirty || form.controls['name'].touched)
+          "
+        >
+          {{ "This field is required" | i18nextFormat }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="description" class="col-sm-2 col-form-label">{{
+        "Description" | i18nextFormat
+      }}</label>
+      <div class="col-sm-10">
+        <textarea
+          type="text"
+          class="form-control"
+          id="description"
+          formControlName="description"
+          autocomplete="off"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="price" class="col-sm-2 col-form-label">{{
+        "Price" | i18nextFormat
+      }}</label>
+      <div class="col-sm-10">
+        <input
+          type="number"
+          class="form-control"
+          id="price"
+          formControlName="price"
+          autocomplete="off"
+        />
+        <div
+          class="text-danger"
+          *ngIf="
+            form.controls['price'].hasError('required') &&
+            (form.controls['price'].dirty || form.controls['price'].touched)
+          "
+        >
+          {{ "This field is required" | i18nextFormat }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="priority" class="col-sm-2 col-form-label">{{
+        "Priority" | i18nextFormat
+      }}</label>
+      <div class="col-sm-10">
+        <input
+          type="number"
+          class="form-control"
+          id="priority"
+          formControlName="priority"
+          autocomplete="off"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="no" class="col-sm-2 col-form-label">{{
+        "Nr" | i18nextFormat
+      }}</label>
+      <div class="col-sm-10">
+        <input
+          type="number"
+          class="form-control"
+          id="no"
+          formControlName="no"
+          autocomplete="off"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="availability" class="col-sm-2 col-form-label">{{
+        "Availability" | i18nextFormat
+      }}</label>
+      <div class="col-sm-10">
+        <select
+          class="form-control"
+          id="availability"
+          formControlName="availability"
+        >
+          <option value="1">{{ "True" | i18nextFormat }}</option>
+          <option value="0">{{ "False" | i18nextFormat }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="image" class="col-sm-2 col-form-label">{{
+        "Image" | i18nextFormat
+      }}</label>
+      <div class="col-sm-10">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          (click)="showImageSelectModal(imageTemplate)"
+        >
+          {{ "Select Image" | i18nextFormat }}
+        </button>
+        <div>
+          <img
+            [hidden]="!image"
+            [src]="image"
+            alt="portfolio"
+            style="max-width: 100%; max-height: 250px;"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group mt-3">
+    <button *ngIf="isCreate" class="btn btn-primary">
+      {{ "Create" | i18nextFormat }}
+    </button>
+    <button *ngIf="!isCreate" class="btn btn-success">
+      {{ "Update" | i18nextFormat }}
+    </button>
+    <a [routerLink]="['../']" class="btn btn-default ml-3">{{
+      "Cancel" | i18nextFormat
+    }}</a>
+  </div>
+</form>
+
+<ng-template #imageTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{ "Select Image" | i18nextFormat }}</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div style="min-height: 50vh">
+      <table class="table w-100">
+        <!-- <thead>
+                    <tr>
+                        <th>{{ 'Image' | i18nextFormat }}</th>
+                        <th>{{ 'Url' | i18nextFormat }}</th>
+                        <th width="200"></th>
+                    </tr>
+                </thead> -->
+        <tbody>
+          <tr *ngFor="let image of images">
+            <div class="image">
+              <img
+                [hidden]="!image.weblinkUrl"
+                [src]="getImageUrl(image.weblinkUrl)"
+                alt="portfolio"
+                style="width: auto; height: 170px;"
+              />
+            </div>
+            <!-- <td>
+                            {{getImageUrl(image.weblinkUrl)}}
+                        </td> -->
+            <td class="text-right">
+              <button
+                class="btn btn-primary"
+                (click)="selectImage(image.weblinkUrl, $event)"
+                title="Select"
+              >
+                Select
+                <!-- <i class="fa fa-trash"></i> -->
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="!images.length">
+            <td colspan="5" class="text-center my-5">
+              {{ "No Images Found" | i18nextFormat }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-template>
+

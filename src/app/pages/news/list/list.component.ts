@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Observable, Subject } from "rxjs";
 
 import { SettingsService } from "../../../services/settings/settings.service";
-import { PublicationsService } from "../../../pages/publications/publications.service";
+import { NewsService } from "../../../pages/news/news.service";
 
 @Component({
   selector: "app-list",
@@ -14,14 +14,14 @@ import { PublicationsService } from "../../../pages/publications/publications.se
 export class ListComponent implements OnInit {
   type = "";
 
-  publications: any;
+  news: any;
   error = "";
   validUrl = true;
 
   constructor(
     private route: ActivatedRoute,
     public router: Router,
-    private api: PublicationsService,
+    private api: NewsService,
     private settings: SettingsService
   ) {}
 
@@ -50,22 +50,20 @@ export class ListComponent implements OnInit {
       } else {
         this.validUrl = true;
         this.api.getAll().subscribe(res => {
-          this.publications = res;
+          this.news = res;
         });
       }
     });
   }
 
-  deletePublication(publication) {
+  deleteNews(news) {
     if (!confirm("Are you sure to delete")) {
       return;
     }
 
-    this.api.deletePublication(publication.id).subscribe(
+    this.api.deleteNews(news.id).subscribe(
       res => {
-        this.publications = this.publications.filter(
-          item => item.id != publication.id
-        );
+        this.news = this.news.filter(item => item.id != news.id);
       },
       res => {
         const error = JSON.parse(res._body);

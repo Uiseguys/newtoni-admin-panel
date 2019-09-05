@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ToasterService } from "angular2-toaster";
 
-import { PublicationsService } from "../publications.service";
+import { NewsService } from "../news.service";
 
 @Component({
   selector: "app-create",
@@ -13,7 +13,7 @@ export class CreateComponent implements OnInit {
   constructor(
     public router: Router,
     private toasterService: ToasterService,
-    private api: PublicationsService
+    private api: NewsService
   ) {}
 
   ngOnInit() {}
@@ -43,7 +43,7 @@ export class CreateComponent implements OnInit {
       );
     };
 
-    this.api.createPublication(values).subscribe(
+    this.api.createNews(values).subscribe(
       res => {
         success();
         this.router.navigate(["/dashboard/publications"]);
