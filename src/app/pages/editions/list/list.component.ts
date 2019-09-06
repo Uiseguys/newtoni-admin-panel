@@ -12,6 +12,7 @@ import { EditionsService } from "../../../pages/editions/editions.service";
   encapsulation: ViewEncapsulation.None
 })
 export class ListComponent implements OnInit {
+  validUrl = true;
   editions: any;
   error = "";
 

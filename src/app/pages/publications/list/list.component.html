@@ -1,7 +1,6 @@
 <div class="container" *ngIf="validUrl">
   <h3 class="mt-4">
-    <span class="text-capitalize"
-      >{{ type | i18nextFormat }}
+    <span class="text-capitalize">
       <a [routerLink]="['./create']" class="ml-2 btn btn-primary btn-sm">{{
         "New Publication" | i18nextFormat
       }}</a>
@@ -33,7 +32,7 @@
       </div>
       <div class="text-center">
         <a
-          [routerLink]="'/dashboard/' + publication.type + '/' + publication.id"
+          [routerLink]="'/dashboard/publications/' + publication.id"
           class="text-success"
         >
           <i class="fa fa-edit"></i>

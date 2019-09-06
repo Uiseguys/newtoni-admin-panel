@@ -15,14 +15,14 @@ export class NewsService {
       type
     };
 
-    return this.api.get(`/publications/count?where=${JSON.stringify(filter)}`);
+    return this.api.get(`/news/count?where=${JSON.stringify(filter)}`);
   }
 
   getAll() {
     const filter = {
       order: "id DESC"
     };
-    return this.api.get(`/publications?filter=${JSON.stringify(filter)}`);
+    return this.api.get(`/news?filter=${JSON.stringify(filter)}`);
   }
 
   getNews(date) {
@@ -32,7 +32,7 @@ export class NewsService {
         date
       }
     };
-    return this.api.get(`/publications?filter=${JSON.stringify(filter)}`);
+    return this.api.get(`/news?filter=${JSON.stringify(filter)}`);
   }
 
   searchNews(key) {
@@ -42,25 +42,25 @@ export class NewsService {
       },
       order: ["priority ASC"]
     };
-    return this.api.get(`/publications?filter=${JSON.stringify(filter)}`);
+    return this.api.get(`/news?filter=${JSON.stringify(filter)}`);
   }
 
   createNews(info) {
-    return this.api.post("/publications", info);
+    return this.api.post("/news", info);
   }
 
   updateNews(id, info) {
-    return this.api.patch(`/publications/${id}`, info);
+    return this.api.patch(`/news/${id}`, info);
   }
 
   getNewss(id) {
     const filter = {
       include: ["packaging"]
     };
-    return this.api.get(`/publications/${id}`);
+    return this.api.get(`/news/${id}`);
   }
 
   deleteNews(id) {
-    return this.api.delete(`/publications/${id}`);
+    return this.api.delete(`/news/${id}`);
   }
 }

@@ -12,8 +12,6 @@ import { PublicationsService } from "../../../pages/publications/publications.se
   encapsulation: ViewEncapsulation.None
 })
 export class ListComponent implements OnInit {
-  type = "";
-
   publications: any;
   error = "";
   validUrl = true;

@@ -24,11 +24,6 @@ export const routes = [
     },
     children: [
       { path: "", redirectTo: "/dashboard/news", pathMatch: "full" },
-      { path: "payments", loadChildren: "./order/order.module#OrderModule" },
-      {
-        path: "publications",
-        loadChildren: "./publications/publications.module#PublicationsModule"
-      },
       {
         path: "news",
         loadChildren: "./news/news.module#NewsModule"
@@ -37,6 +32,11 @@ export const routes = [
         path: "editions",
         loadChildren: "./editions/editions.module#EditionsModule"
       },
+      {
+        path: "publications",
+        loadChildren: "./publications/publications.module#PublicationsModule"
+      },
+      { path: "payments", loadChildren: "./order/order.module#OrderModule" },
       {
         path: "images",
         loadChildren: "./image/image.module#ImageModule"

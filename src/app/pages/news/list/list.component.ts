@@ -14,6 +14,7 @@ import { NewsService } from "../../../pages/news/news.service";
 export class ListComponent implements OnInit {
   news: any;
   error = "";
+  validUrl = true;
 
   constructor(
     private route: ActivatedRoute,

@@ -1,3 +1,10 @@
-<p>
-  edit works!
-</p>
+<div class="container">
+  <h3 class="my-5">
+    {{ "Update" | i18nextFormat }} {{ "Publication" | i18nextFormat }}
+  </h3>
+  <app-publications-form
+    [isCreate]="false"
+    (onSubmit)="handleSubmit($event)"
+    [initialValue]="publication"
+  ></app-publications-form>
+</div>
