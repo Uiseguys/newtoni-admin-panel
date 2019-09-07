@@ -34,11 +34,6 @@ export class EditComponent implements OnInit {
     } else {
       values.availability = false;
     }
-    if (parseInt(values.premium)) {
-      values.premium = true;
-    } else {
-      values.premium = false;
-    }
     if (values.content) {
       values.content = 1;
     } else {
@@ -50,29 +45,25 @@ export class EditComponent implements OnInit {
     if (!values.no) {
       values.no = 0;
     }
-    values.id = parseInt(values.id);
-    this.api
-      .updatePublication(this.publication.id, {
-        ...this.publication,
-        ...values
-      })
-      .subscribe(
-        res => {
-          this.toasterService.popAsync(
-            "success",
-            "",
-            "Publication has been updated"
-          );
-          this.router.navigate(["/dashboard/publications"]);
-        },
-        res => {
-          const body = JSON.parse(res._body);
-          this.toasterService.popAsync(
-            "error",
-            "",
-            (body.error && body.error.message) || "Sorry, something went wrong"
-          );
-        }
-      );
+    const d = new Date();
+    values.update_time = d.toISOString();
+    this.api.updatePublication(this.publication.id, values).subscribe(
+      res => {
+        this.toasterService.popAsync(
+          "success",
+          "",
+          "Publication has been updated"
+        );
+        this.router.navigate(["/dashboard/publications"]);
+      },
+      res => {
+        const body = JSON.parse(res._body);
+        this.toasterService.popAsync(
+          "error",
+          "",
+          (body.error && body.error.message) || "Sorry, something went wrong"
+        );
+      }
+    );
   }
 }

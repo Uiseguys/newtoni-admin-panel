@@ -1,11 +1,8 @@
 <div class="container" *ngIf="validUrl">
   <h3 class="mt-4">
-    <span class="text-capitalize"
-      >{{ type | i18nextFormat }}
-      <a [routerLink]="['./create']" class="ml-2 btn btn-primary btn-sm">{{
-        "New Edition" | i18nextFormat
-      }}</a>
-    </span>
+    <a [routerLink]="['./create']" class="ml-2 btn btn-primary btn-sm">{{
+      "New Edition" | i18nextFormat
+    }}</a>
   </h3>
 
   <div *ngIf="editions && !editions.length" class="text-center mt-5">
@@ -14,7 +11,7 @@
 
   <div class="edition-list clearfix">
     <div *ngFor="let edition of editions" class="float-left m-2">
-      <div class="c-edition">
+      <div class="c-editions">
         <div class="image">
           <img
             [hidden]="!edition.image"
@@ -24,16 +21,16 @@
           />
         </div>
         <div class="description">
-          <h4 class="item_name">{{ edition.name }}</h4>
+          <h4 class="item_name">{{ edition.title }}</h4>
 
           <div class="edition__costs">
-            <span class="c-price"> {{ edition.price }}&euro; </span>
+            <span class="c-price"> {{ edition.create_time }} ago </span>
           </div>
         </div>
       </div>
       <div class="text-center">
         <a
-          [routerLink]="'/dashboard/' + edition.type + '/' + edition.id"
+          [routerLink]="'/dashboard/editions/' + edition.id"
           class="text-success"
         >
           <i class="fa fa-edit"></i>

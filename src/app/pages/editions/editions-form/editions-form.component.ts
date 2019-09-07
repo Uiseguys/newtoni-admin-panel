@@ -28,7 +28,6 @@ export class EditionsFormComponent implements OnInit, OnChanges {
   form: FormGroup;
   error = "";
   image = "";
-  packagings = [];
   images = [];
 
   modalRef: any;
@@ -45,17 +44,10 @@ export class EditionsFormComponent implements OnInit, OnChanges {
     private settings: SettingsService
   ) {
     this.form = fb.group({
-      name: ["", Validators.compose([Validators.required])],
-      price: ["", Validators.compose([Validators.required])],
-      availability: [""],
-      content: [""],
-      priority: [""],
-      no: [""],
-      description: [""]
+      title: ["", Validators.compose([Validators.required])],
+      author: ["", Validators.compose([Validators.required])],
+      post: ["", Validators.compose([Validators.required])]
     });
-
-    this.form.controls.availability.setValue(1);
-    this.form.controls.priority.setValue(0);
   }
 
   ngOnInit() {

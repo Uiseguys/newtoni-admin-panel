@@ -25,7 +25,7 @@ export class NewsService {
     return this.api.get(`/news?filter=${JSON.stringify(filter)}`);
   }
 
-  getNews(date) {
+  getNewss(date) {
     const filter = {
       order: "priority ASC",
       where: {
@@ -53,10 +53,7 @@ export class NewsService {
     return this.api.patch(`/news/${id}`, info);
   }
 
-  getNewss(id) {
-    const filter = {
-      include: ["packaging"]
-    };
+  getNews(id) {
     return this.api.get(`/news/${id}`);
   }
 

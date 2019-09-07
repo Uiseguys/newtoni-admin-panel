@@ -1,3 +1,10 @@
-<p>
-  edit works!
-</p>
+<div class="container">
+  <h3 class="my-5">
+    {{ "Update" | i18nextFormat }} {{ "Edition" | i18nextFormat }}
+  </h3>
+  <app-editions-form
+    [isCreate]="false"
+    (onSubmit)="handleSubmit($event)"
+    [initialValue]="edition"
+  ></app-editions-form>
+</div>

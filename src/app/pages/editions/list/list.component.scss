@@ -1,5 +1,5 @@
 app-list {
-  .c-publication {
+  .c-editions {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -28,7 +28,7 @@ app-list {
       min-height: 140px;
       margin-top: 30px;
     }
-    .publication__vintage {
+    .editions__vintage {
       position: absolute;
       top: 0px;
       width: 100%;

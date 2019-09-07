@@ -19,34 +19,14 @@ export class CreateComponent implements OnInit {
   ngOnInit() {}
 
   handleSubmit = values => {
-    if (parseInt(values.availability)) {
-      values.availability = true;
-    } else {
-      values.availability = false;
-    }
-    if (values.content) {
-      values.content = 1;
-    } else {
-      values.content = 0;
-    }
-    if (!values.description) {
-      values.description = "";
-    }
-    if (!values.no) {
-      values.no = 0;
-    }
-    const success = () => {
-      this.toasterService.popAsync(
-        "success",
-        "",
-        "Publication has been created"
-      );
-    };
-
     this.api.createNews(values).subscribe(
       res => {
-        success();
-        this.router.navigate(["/dashboard/publications"]);
+        this.toasterService.popAsync(
+          "success",
+          "",
+          "Publication has been created"
+        );
+        this.router.navigate(["/dashboard/news"]);
       },
       res => {
         const body = JSON.parse(res._body);

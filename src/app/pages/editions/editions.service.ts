@@ -54,9 +54,6 @@ export class EditionsService {
   }
 
   getEdition(id) {
-    const filter = {
-      include: ["packaging"]
-    };
     return this.api.get(`/editions/${id}`);
   }
 

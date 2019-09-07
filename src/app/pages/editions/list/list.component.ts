@@ -4,6 +4,7 @@ import { Observable, Subject } from "rxjs";
 
 import { SettingsService } from "../../../services/settings/settings.service";
 import { EditionsService } from "../../../pages/editions/editions.service";
+import * as bigInt from "big-integer";
 
 @Component({
   selector: "app-list",
@@ -16,6 +17,43 @@ export class ListComponent implements OnInit {
   editions: any;
   error = "";
 
+  // Takes Milliseconds and quantifies the amount of time
+  timeDiff = (ms): string => {
+    if (bigInt(ms).geq(31536000000)) {
+      // Check years
+      ms = bigInt(ms).divide(31536000000);
+      return `${ms} ${ms < 2 ? "yr" : "yrs"}`;
+    } else if (bigInt(ms).geq(18144000000)) {
+      // Check months
+      ms = bigInt(ms).divide(18144000000);
+      ms = Math.round(ms);
+      return `${ms} ${ms < 2 ? "month" : "months"}`;
+    } else if (bigInt(ms).geq(604800000)) {
+      // Check weeks
+      ms = bigInt(ms).divide(604800000);
+      ms = Math.round(ms);
+      return `${ms} ${ms < 2 ? "wk" : "wks"}`;
+    } else if (bigInt(ms).geq(86400000)) {
+      // Check days
+      ms = bigInt(ms).divide(86400000);
+      ms = Math.round(ms);
+      return `${ms} ${ms < 2 ? "day" : "days"}`;
+    } else if (bigInt(ms).geq(3600000)) {
+      // Check hours
+      ms = bigInt(ms).divide(3600000);
+      ms = Math.round(ms);
+      return `${ms} ${ms < 2 ? "hr" : "hrs"}`;
+    } else if (bigInt(ms).geq(60000)) {
+      // Check minutes
+      ms = bigInt(ms).divide(60000);
+      ms = Math.round(ms);
+      return `${ms} ${ms < 2 ? "min" : "mins"}`;
+    } else if (bigInt(ms).geq(1000)) {
+      // Check minutes
+      return Math.round(ms / 1000) + "s";
+    }
+  };
+
   constructor(
     private route: ActivatedRoute,
     public router: Router,
@@ -25,7 +63,14 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.api.getAll().subscribe(res => {
-      this.editions = res;
+      const date = new Date().getTime();
+      let tmp;
+      this.editions = res.map((item, index) => {
+        tmp = date - Date.parse(res[index].create_time);
+        item.create_time = this.timeDiff(parseInt(tmp));
+        console.log("##############" + item.create_time + " ago");
+        return item;
+      });
     });
   }
 

@@ -19,29 +19,9 @@ export class CreateComponent implements OnInit {
   ngOnInit() {}
 
   handleSubmit = values => {
-    if (parseInt(values.availability)) {
-      values.availability = true;
-    } else {
-      values.availability = false;
-    }
-    if (values.content) {
-      values.content = 1;
-    } else {
-      values.content = 0;
-    }
-    if (!values.description) {
-      values.description = "";
-    }
-    if (!values.no) {
-      values.no = 0;
-    }
-    const success = () => {
-      this.toasterService.popAsync("success", "", "Edition has been created");
-    };
-
     this.api.createEdition(values).subscribe(
       res => {
-        success();
+        this.toasterService.popAsync("success", "", "Edition has been created");
         this.router.navigate(["/dashboard/editions"]);
       },
       res => {

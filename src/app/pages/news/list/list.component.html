@@ -1,11 +1,8 @@
 <div class="container" *ngIf="validUrl">
   <h3 class="mt-4">
-    <span class="text-capitalize"
-      >{{ type | i18nextFormat }}
-      <a [routerLink]="['./create']" class="ml-2 btn btn-primary btn-sm">{{
-        "New News" | i18nextFormat
-      }}</a>
-    </span>
+    <a [routerLink]="['./create']" class="ml-2 btn btn-primary btn-sm">{{
+      "New News" | i18nextFormat
+    }}</a>
   </h3>
 
   <div *ngIf="news && !news.length" class="text-center mt-5">
@@ -24,18 +21,15 @@
           />
         </div>
         <div class="description">
-          <h4 class="item_name">{{ news.name }}</h4>
+          <h4 class="item_name">{{ news.title }}</h4>
 
           <div class="news__costs">
-            <span class="c-price"> {{ news.price }}&euro; </span>
+            <span class="c-price"> {{ news.create_time }} ago</span>
           </div>
         </div>
       </div>
       <div class="text-center">
-        <a
-          [routerLink]="'/dashboard/' + news.type + '/' + news.id"
-          class="text-success"
-        >
+        <a [routerLink]="'/dashboard/news/' + news.id" class="text-success">
           <i class="fa fa-edit"></i>
         </a>
         <a class="text-danger cp ml-3" (click)="deleteNews(news)">
