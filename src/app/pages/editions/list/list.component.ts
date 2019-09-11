@@ -67,8 +67,7 @@ export class ListComponent implements OnInit {
       let tmp;
       this.editions = res.map((item, index) => {
         tmp = date - Date.parse(res[index].create_time);
-        item.create_time = this.timeDiff(parseInt(tmp));
-        console.log("##############" + item.create_time + " ago");
+        item.create_time = this.timeDiff(tmp);
         return item;
       });
     });

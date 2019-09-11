@@ -1,21 +1,21 @@
-import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { ToasterService } from 'angular2-toaster';
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from "@angular/core";
+import { ToasterService } from "angular2-toaster";
 
-import { ClientApiService } from '../../../services/api/clientapi.service';
-import { SettingsService as ConfigService } from '../../../services/settings/settings.service';
-import { SettingService } from '../setting.service';
+import { ClientApiService } from "../../../services/api/clientapi.service";
+import { SettingsService as ConfigService } from "../../../services/settings/settings.service";
+import { SettingService } from "../setting.service";
 
 declare var $: any;
 
 @Component({
-  selector: 'app-setting-page',
-  templateUrl: './setting.page.html',
-  styleUrls: ['./setting.page.scss'],
+  selector: "app-setting-page",
+  templateUrl: "./setting.page.html",
+  styleUrls: ["./setting.page.scss"],
   encapsulation: ViewEncapsulation.None
 })
 export class SettingPage implements OnInit, OnDestroy {
   settings: any = {
-    netlifySiteID: ''
+    netlifySiteID: ""
   };
   emailSetting: any = {};
 
@@ -31,35 +31,36 @@ export class SettingPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.api.getAll().subscribe(res => {
       let item;
-      item = res.find(item => item.key === 'settings');
+      item = res.find(item => item.key === "settings");
       this.settings = item ? item.value : {};
 
-      item = res.find(item => item.key === 'email');
+      item = res.find(item => item.key === "email");
       this.emailSetting = item ? item.value : {};
     });
+    console.log(this.settings);
   }
 
   ngOnDestroy() {}
 
   updateNetlifySetting() {
-    this.api.updateSetting('settings', this.settings).subscribe(res => {
+    this.api.updateSetting("settings", this.settings).subscribe(res => {
       this.toasterService.popAsync(
-        'success',
-        '',
-        'Netlify Settings have been updated'
+        "success",
+        "",
+        "Netlify Settings have been updated"
       );
-      this.config.setAppSetting('settings', this.settings);
+      this.config.setAppSetting("settings", this.settings);
     });
   }
 
   updateEmailSetting() {
-    this.api.updateSetting('email', this.emailSetting).subscribe(res => {
+    this.api.updateSetting("settings", this.settings).subscribe(res => {
       this.toasterService.popAsync(
-        'success',
-        '',
-        'Email addresses have been updated'
+        "success",
+        "",
+        "Email Address Settings have been updated"
       );
-      this.config.setAppSetting('email', this.emailSetting);
+      this.config.setAppSetting("settings", this.settings);
     });
   }
 }
