@@ -1,6 +1,6 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from "@angular/core";
 
-import { environment as ENV } from '../../../environments/environment';
+import { environment as ENV } from "../../../environments/environment";
 
 @Injectable()
 export class SettingsService {
@@ -8,7 +8,7 @@ export class SettingsService {
   public app: any;
   public layout: any;
   public API_URL = ENV.apiUrl;
-  public FILE_URL = ENV.apiUrl + '/attachments/all/download/';
+  public FILE_URL = ENV.apiUrl + "/attachments/all/download/";
 
   public toastEvent = new EventEmitter<Object>();
 
@@ -20,7 +20,7 @@ export class SettingsService {
     // App Settings
     // -----------------------------------
     this.app = {
-      name: 'stanapp',
+      name: "stanapp",
       user: { roles: [] },
       year: new Date().getFullYear()
     };
@@ -39,7 +39,7 @@ export class SettingsService {
   setAppSetting(name, value, save?) {
     this.app[name] = value;
     if (save) {
-      this.setStorage('app-' + name, value);
+      this.setStorage("app-" + name, value);
     }
   }
 
@@ -48,8 +48,8 @@ export class SettingsService {
   }
 
   clearSetting() {
-    this.removeStorage('userId');
-    this.removeStorage('token');
+    this.removeStorage("userId");
+    this.removeStorage("token");
   }
 
   getStorage(key, defaultVal?) {

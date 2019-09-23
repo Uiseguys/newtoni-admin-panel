@@ -65,10 +65,10 @@ export class ImagePage implements OnInit {
     this.router.navigate(["/dashboard/images"], { queryParams: { page } });
   }
 
-  deleteImage(image) {
+  deleteImage(id) {
     if (!confirm("Are you sure to delete")) return;
 
-    this.api.deleteImage(image.id).subscribe(res => {
+    this.api.deleteImage(id).subscribe(res => {
       this.toasterService.popAsync("success", "", "Image has been deleted");
       this.loadImages();
     });

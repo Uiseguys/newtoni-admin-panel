@@ -1,11 +1,18 @@
 <div>
-    <button type="button" class="btn btn-primary btn-sm" (click)="selectFile()">
-        Add Image
-    </button>
-    <div class="progress my-2" *ngFor="let item of uploader.queue">
-        <div class="progress-bar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
-    </div>
-    <input type="file" id="file" class="file d-none" ng2FileSelect [uploader]="uploader">
+  <button type="button" class="btn btn-primary btn-sm" (click)="selectFile()">
+    Add Image
+  </button>
+  <div class="progress my-2" *ngFor="let item of uploader.queue">
+    <div class="progress-bar" [ngStyle]="{ width: item.progress + '%' }"></div>
+  </div>
+  <input
+    type="file"
+    id="file"
+    class="file d-none"
+    ng2FileSelect
+    [uploader]="uploader"
+  />
 
-    <ng-content></ng-content>
+  <ng-content></ng-content>
 </div>
+
