@@ -1,6 +1,6 @@
 <div class="container">
   <div class="d-flex mb-4 align-items-center">
-    <h3>{{ "Images" | i18nextFormat }}</h3>
+    <h3><!--{{"Images" | i18nextFormat}}-->Images</h3>
     <div class="col-sm-10">
       <attach-uploader
         [mimeTypes]="['image/png', 'image/jpeg', 'image/jpg', 'image/png']"
@@ -13,8 +13,8 @@
     <table class="table w-100">
       <thead>
         <tr>
-          <th>{{ "Image" | i18nextFormat }}</th>
-          <th>{{ "Url" | i18nextFormat }}</th>
+          <th><!--{{"Image" | i18nextFormat}}-->Image</th>
+          <th><!--{{"Url" | i18nextFormat}}-->Url</th>
           <th width="200"></th>
         </tr>
       </thead>
@@ -43,7 +43,7 @@
         </tr>
         <tr *ngIf="!pageConfig.totalItems">
           <td colspan="5" class="text-center my-5">
-            {{ "No Images Found" | i18nextFormat }}
+            <!--{{ "No Images Found" | i18nextFormat }}-->No Images Found
           </td>
         </tr>
       </tbody>
@@ -57,4 +57,3 @@
     <pagination-controls (pageChange)="getImages($event)"></pagination-controls>
   </div>
 </div>
-

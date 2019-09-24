@@ -16,19 +16,20 @@ export class ImageService {
     return this.api.get("/storage/images/tmp");
   }
 
-  getImages(folder, page = 1, pageSize = 500) {
+  getImages(folder: string, page = 1, pageSize = 500) {
     const filter = {
       skip: page > 0 ? (page - 1) * pageSize : 0,
       limit: pageSize
     };
-    return this.api.get(`/storage/tmp?filter=${JSON.stringify(filter)}`);
+    return this.api.get(`/storage/${folder}?filter=${JSON.stringify(filter)}`);
   }
 
-  getAllImages() {
-    // Making requests for each image folder and sending them
-    let arr = this.api.get(`/storage/news-images`);
-    arr.concat(this.api.get(`/storage/editions-images`));
-    return arr.concat(this.api.get(`/storage/publications-images`));
+  getAllImages(page = 1, pageSize = 500) {
+    const filter = {
+      skip: page > 0 ? (page - 1) * pageSize : 0,
+      limit: pageSize
+    };
+    return this.api.get(`/storage/all?filter=${JSON.stringify(filter)}`);
   }
 
   deleteImage(id) {

@@ -1,14 +1,14 @@
 <div class="container" *ngIf="validUrl">
   <h3 class="mt-4">
     <span class="text-capitalize">
-      <a [routerLink]="['./create']" class="ml-2 btn btn-primary btn-sm">{{
-        "New Publication" | i18nextFormat
-      }}</a>
+      <a [routerLink]="['./create']" class="ml-2 btn btn-primary btn-sm">
+        <!--{{ "New Publication" | i18nextFormat }}-->New Publication
+      </a>
     </span>
   </h3>
 
   <div *ngIf="publications && !publications.length" class="text-center mt-5">
-    {{ "No Publication Found" | i18nextFormat }}
+    <!--{{ "No Publication Found" | i18nextFormat }}-->No Publication Found
   </div>
 
   <div class="publication-list clearfix">

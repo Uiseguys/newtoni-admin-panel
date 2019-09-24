@@ -52,13 +52,16 @@ export class ImagePage implements OnInit {
       });
 
       this.page = page;
-      this.images = this.api.getImages(page, this.pageConfig.itemsPerPage);
+      this.images = this.api.getAllImages();
       this.pageConfig.currentPage = page;
     });
   }
 
   loadImages() {
-    this.images = this.api.getImages(this.page, this.pageConfig.itemsPerPage);
+    this.images = this.api.getAllImages(
+      this.page,
+      this.pageConfig.itemsPerPage
+    );
   }
 
   getImages(page: number) {

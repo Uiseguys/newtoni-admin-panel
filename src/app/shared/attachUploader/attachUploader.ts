@@ -39,13 +39,15 @@ export class AttachUploader implements OnInit {
     private settings: SettingsService,
     public zone: NgZone
   ) {
-    this.token = this.settings.getStorage("token", "");
+    //this.token = this.settings.getStorage("token", "");
   }
 
   ngOnInit() {
     this.uploader = new FileUploader({
       url: this.settings.API_URL,
-      authToken: this.settings.getStorage("token"),
+      disableMultipart: false,
+      method: "post",
+      //authToken: this.settings.getStorage("token"),
       allowedMimeType: this.mimeTypes
     });
 
@@ -100,8 +102,8 @@ export class AttachUploader implements OnInit {
 
     this.route.params.subscribe(params => {
       this.uploader.setOptions({
-        url: this.settings.API_URL + `/storage/upload/${params.type}`,
-        authToken: this.settings.getStorage("token"),
+        url: this.settings.API_URL + `/storage/upload/`,
+        //authToken: this.settings.getStorage("token"),
         allowedMimeType: this.mimeTypes
       });
     });

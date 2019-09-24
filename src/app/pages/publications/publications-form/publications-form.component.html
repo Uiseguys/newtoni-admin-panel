@@ -7,7 +7,7 @@
   <div class="p-3" style="border: 2px solid #f7f7f9;">
     <div class="form-group row">
       <label for="name" class="col-sm-2 col-form-label">
-        {{ "Name" | i18nextFormat }}
+        <!--{{ "Name" | i18nextFormat }}-->Name
       </label>
       <div class="col-sm-10">
         <input
@@ -24,15 +24,16 @@
             (form.controls['name'].dirty || form.controls['name'].touched)
           "
         >
-          {{ "This field is required" | i18nextFormat }}
+          <!--{{ "This field is required" | i18nextFormat }}-->This field is
+          required
         </div>
       </div>
     </div>
 
     <div class="form-group row">
-      <label for="description" class="col-sm-2 col-form-label">{{
-        "Description" | i18nextFormat
-      }}</label>
+      <label for="description" class="col-sm-2 col-form-label">
+        <!--{{ "Description" | i18nextFormat }}-->Description
+      </label>
       <div class="col-sm-10">
         <textarea
           type="text"
@@ -45,9 +46,9 @@
     </div>
 
     <div class="form-group row">
-      <label for="price" class="col-sm-2 col-form-label">{{
-        "Price" | i18nextFormat
-      }}</label>
+      <label for="price" class="col-sm-2 col-form-label">
+        <!--{{ "Price" | i18nextFormat }}-->Price
+      </label>
       <div class="col-sm-10">
         <input
           type="number"
@@ -63,15 +64,16 @@
             (form.controls['price'].dirty || form.controls['price'].touched)
           "
         >
-          {{ "This field is required" | i18nextFormat }}
+          <!--{{ "This field is required" | i18nextFormat }}-->This field is
+          required
         </div>
       </div>
     </div>
 
     <div class="form-group row">
-      <label for="priority" class="col-sm-2 col-form-label">{{
-        "Priority" | i18nextFormat
-      }}</label>
+      <label for="priority" class="col-sm-2 col-form-label">
+        <!--{{ "Priority" | i18nextFormat }}-->Priority
+      </label>
       <div class="col-sm-10">
         <input
           type="number"
@@ -84,9 +86,9 @@
     </div>
 
     <div class="form-group row">
-      <label for="no" class="col-sm-2 col-form-label">{{
-        "Nr" | i18nextFormat
-      }}</label>
+      <label for="no" class="col-sm-2 col-form-label">
+        <!--{{ "Nr" | i18nextFormat }}-->Nr
+      </label>
       <div class="col-sm-10">
         <input
           type="number"
@@ -99,32 +101,32 @@
     </div>
 
     <div class="form-group row">
-      <label for="availability" class="col-sm-2 col-form-label">{{
-        "Availability" | i18nextFormat
-      }}</label>
+      <label for="availability" class="col-sm-2 col-form-label">
+        <!--{{ "Availability" | i18nextFormat }}-->Availability
+      </label>
       <div class="col-sm-10">
         <select
           class="form-control"
           id="availability"
           formControlName="availability"
         >
-          <option value="1">{{ "True" | i18nextFormat }}</option>
-          <option value="0">{{ "False" | i18nextFormat }}</option>
+          <option value="1"> <!--{{ "True" | i18nextFormat }}-->True </option>
+          <option value="0"> <!--{{ "False" | i18nextFormat }}-->False </option>
         </select>
       </div>
     </div>
 
     <div class="form-group row">
-      <label for="image" class="col-sm-2 col-form-label">{{
-        "Image" | i18nextFormat
-      }}</label>
+      <label for="image" class="col-sm-2 col-form-label">
+        <!--{{ "Image" | i18nextFormat }}-->Image
+      </label>
       <div class="col-sm-10">
         <button
           type="button"
           class="btn btn-primary btn-sm"
           (click)="showImageSelectModal(imageTemplate)"
         >
-          {{ "Select Image" | i18nextFormat }}
+          <!--{{ "Select Image" | i18nextFormat }}-->Select Image
         </button>
         <div>
           <img
@@ -140,20 +142,23 @@
 
   <div class="form-group mt-3">
     <button *ngIf="isCreate" class="btn btn-primary">
-      {{ "Create" | i18nextFormat }}
+      <!--{{ "Create" | i18nextFormat }}-->Create
     </button>
     <button *ngIf="!isCreate" class="btn btn-success">
-      {{ "Update" | i18nextFormat }}
+      <!--{{ "Update" | i18nextFormat }}-->Update
     </button>
-    <a [routerLink]="['../']" class="btn btn-default ml-3">{{
-      "Cancel" | i18nextFormat
-    }}</a>
+    <a [routerLink]="['../']" class="btn btn-default ml-3"
+      >{{
+      <!--"Cancel" | i18nextFormat-->Cancel }}</a
+    >
   </div>
 </form>
 
 <ng-template #imageTemplate>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">{{ "Select Image" | i18nextFormat }}</h4>
+    <h4 class="modal-title pull-left">
+      <!--{{ "Select Image" | i18nextFormat }}-->Select Image
+    </h4>
     <button
       type="button"
       class="close pull-right"
@@ -199,7 +204,7 @@
           </tr>
           <tr *ngIf="!images.length">
             <td colspan="5" class="text-center my-5">
-              {{ "No Images Found" | i18nextFormat }}
+              <!--{{ "No Images Found" | i18nextFormat }}-->No Images Found
             </td>
           </tr>
         </tbody>
@@ -207,4 +212,3 @@
     </div>
   </div>
 </ng-template>
-

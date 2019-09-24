@@ -1,106 +1,141 @@
 <div class="container">
-  <h3 class="mt-4">{{ 'Payments' | i18nextFormat }}</h3>
+  <h3 class="mt-4"><!--{{ "Payments" | i18nextFormat }}-->Payments</h3>
 
   <div *ngIf="!pageConfig.totalItems" class="text-center mt-5">
-    {{ 'No payments Found' | i18nextFormat }}
+    <!--{{ 'No payments Found' | i18nextFormat }}-->No payments Found
   </div>
 
   <table *ngIf="pageConfig.totalItems > 0" class="table w-100">
     <thead>
       <tr>
-        <th>{{ 'Order ID' | i18nextFormat }}</th>
-        <th>{{ 'Type' | i18nextFormat }}</th>
-        <th>{{ 'Email' | i18nextFormat }}</th>
-        <th>{{ 'Amount' | i18nextFormat }}</th>
-        <th>{{ 'Created' | i18nextFormat }}</th>
-        <th>{{ 'Completed' | i18nextFormat }}</th>
+        <th><!--{{ 'Order ID' | i18nextFormat }}-->Order ID</th>
+        <th><!--{{ 'Type' | i18nextFormat }}-->Type</th>
+        <th><!--{{ 'Email' | i18nextFormat }}-->Email</th>
+        <th><!--{{ 'Amount' | i18nextFormat }}-->Amount</th>
+        <th><!--{{ 'Created' | i18nextFormat }}-->Created</th>
+        <th><!--{{ 'Completed' | i18nextFormat }}-->Completed</th>
         <th width="100"></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let order of orders | async | paginate: pageConfig">
         <td>
-          {{order.id}}
+          {{ order.id }}
         </td>
         <td>
-          {{order.type}}
+          {{ order.type }}
         </td>
         <td>
-          {{order.email}}
+          {{ order.email }}
         </td>
         <td>
-          {{order.total}}
+          {{ order.total }}
         </td>
         <td>
-          {{order.created}}
+          {{ order.created }}
         </td>
         <td>
-          {{order.completed}}
+          {{ order.completed }}
         </td>
         <td class="text-right">
-          <button class="btn btn-success" (click)="showDetailModal(order, detailTemplate)">View Details</button>
+          <button
+            class="btn btn-success"
+            (click)="showDetailModal(order, detailTemplate)"
+          >
+            View Details
+          </button>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <div *ngIf="pageConfig.totalItems > 0" class="mt-2 d-flex justify-content-center">
+  <div
+    *ngIf="pageConfig.totalItems > 0"
+    class="mt-2 d-flex justify-content-center"
+  >
     <pagination-controls (pageChange)="getOrders($event)"></pagination-controls>
   </div>
 </div>
 
 <ng-template #detailTemplate>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">{{ 'Payment Details' | i18nextFormat }}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="detailModalRef.hide()">
+    <h4 class="modal-title pull-left">
+      <!--{{ 'Payment Details' | i18nextFormat }}-->Payment Details
+    </h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="detailModalRef.hide()"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <ul>
       <li *ngFor="let item of selectedOrder.items">
-        {{item.name}} - {{item.price}} x {{item.quantity}}
+        {{ item.name }} - {{ item.price }} x {{ item.quantity }}
       </li>
     </ul>
     <div class="row">
-      <label for="staticEmail" class="col-sm-3">{{ 'Sub Total' | i18nextFormat }}</label>
-      <div class="col-sm-9">{{selectedOrder.subtotal}}</div>
+      <label for="staticEmail" class="col-sm-3">
+        <!--{{ 'Sub Total' | i18nextFormat }}-->Sub Total
+      </label>
+      <div class="col-sm-9">{{ selectedOrder.subtotal }}</div>
     </div>
     <div class="row">
-      <label for="staticEmail" class="col-sm-3">{{ 'Shipping' | i18nextFormat }}</label>
-      <div class="col-sm-9">{{selectedOrder.shipping}}</div>
+      <label for="staticEmail" class="col-sm-3">
+        <!--{{ 'Shipping' | i18nextFormat }}-->Shipping
+      </label>
+      <div class="col-sm-9">{{ selectedOrder.shipping }}</div>
     </div>
     <div class="row">
-      <label for="staticEmail" class="col-sm-3">{{ 'Total' | i18nextFormat }}</label>
-      <div class="col-sm-9">{{selectedOrder.total}}</div>
+      <label for="staticEmail" class="col-sm-3">
+        <!--{{ 'Total' | i18nextFormat }}-->Total
+      </label>
+      <div class="col-sm-9">{{ selectedOrder.total }}</div>
     </div>
     <div class="row">
-      <label for="staticEmail" class="col-sm-3">{{ 'Name' | i18nextFormat }}</label>
-      <div class="col-sm-9">{{selectedOrder.realname}}</div>
+      <label for="staticEmail" class="col-sm-3">
+        <!--{{ 'Name' | i18nextFormat }}-->Name
+      </label>
+      <div class="col-sm-9">{{ selectedOrder.realname }}</div>
     </div>
     <div class="row">
-      <label for="staticEmail" class="col-sm-3">{{ 'Email' | i18nextFormat }}</label>
-      <div class="col-sm-9">{{selectedOrder.email}}</div>
+      <label for="staticEmail" class="col-sm-3">
+        <!--{{ 'Email' | i18nextFormat }}-->Email
+      </label>
+      <div class="col-sm-9">{{ selectedOrder.email }}</div>
     </div>
     <div class="row">
-      <label for="staticEmail" class="col-sm-3 text-capitalize">{{ 'Street' | i18nextFormat }}</label>
-      <div class="col-sm-9">{{selectedOrder.street}}</div>
+      <label for="staticEmail" class="col-sm-3 text-capitalize">
+        <!--{{ 'Street' | i18nextFormat }}-->Street
+      </label>
+      <div class="col-sm-9">{{ selectedOrder.street }}</div>
     </div>
     <div class="row">
-      <label for="staticEmail" class="col-sm-3 text-capitalize">{{ 'Zip' | i18nextFormat }}</label>
-      <div class="col-sm-9">{{selectedOrder.zip}}</div>
+      <label for="staticEmail" class="col-sm-3 text-capitalize">
+        <!--{{ 'Zip' | i18nextFormat }}-->Zip
+      </label>
+      <div class="col-sm-9">{{ selectedOrder.zip }}</div>
     </div>
     <div class="row">
-      <label for="staticEmail" class="col-sm-3 text-capitalize">{{ 'City' | i18nextFormat }}</label>
-      <div class="col-sm-9">{{selectedOrder.city}}</div>
+      <label for="staticEmail" class="col-sm-3 text-capitalize">
+        <!--{{ 'City' | i18nextFormat }}-->City
+      </label>
+      <div class="col-sm-9">{{ selectedOrder.city }}</div>
     </div>
     <div class="row">
-      <label for="staticEmail" class="col-sm-3 text-capitalize">{{ 'Phone' | i18nextFormat }}</label>
-      <div class="col-sm-9">{{selectedOrder.phone}}</div>
+      <label for="staticEmail" class="col-sm-3 text-capitalize">
+        <!--{{ 'Phone' | i18nextFormat }}-->Phone
+      </label>
+      <div class="col-sm-9">{{ selectedOrder.phone }}</div>
     </div>
     <div class="row">
-      <label for="staticEmail" class="col-sm-3 text-capitalize">{{ 'Message' | i18nextFormat }}</label>
-      <div class="col-sm-9">{{selectedOrder.message}}</div>
+      <label for="staticEmail" class="col-sm-3 text-capitalize">
+        <!--{{ 'Message' | i18nextFormat }}-->Message
+      </label>
+      <div class="col-sm-9">{{ selectedOrder.message }}</div>
     </div>
   </div>
 </ng-template>
