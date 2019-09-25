@@ -93,12 +93,40 @@
           <!--{{ "Select Image" | i18nextFormat }}-->Select Image
         </button>
         <div>
-          <img
-            [hidden]="!image"
-            [src]="image"
-            alt="portfolio"
-            style="max-width: 100%; max-height: 250px;"
-          />
+          <table class="table w-100">
+            <tbody>
+              <tr *ngFor="let img of image">
+                <div class="image">
+                  <img
+                    [hidden]="!img.url"
+                    [src]="img.url"
+                    alt="portfolio"
+                    style="width: auto; height: 170px;"
+                  />
+                </div>
+                <td class="text-right">
+                  <button
+                    class="btn btn-danger"
+                    (click)="deleteImage(img)"
+                    title="Delete"
+                  >
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr *ngIf="!image.length">
+                <td colspan="5" class="text-center my-5">
+                  <!--{{ "No Images Found" | i18nextFormat }}-->No Images Found
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!--<img-->
+          <!--[hidden]="!image.url"-->
+          <!--[src]="image"-->
+          <!--alt="portfolio"-->
+          <!--style="max-width: 100%; max-height: 250px;"-->
+          <!--/>-->
         </div>
       </div>
     </div>
@@ -120,7 +148,7 @@
 <ng-template #imageTemplate>
   <div class="modal-header">
     <h4 class="modal-title pull-left">
-      <!--{{ "Select Image" | i18nextFormat }}-->Select Image
+      <!--{{"Select Image" | i18nextFormat }}-->Select Image
     </h4>
     <button
       type="button"
@@ -145,8 +173,8 @@
           <tr *ngFor="let image of images">
             <div class="image">
               <img
-                [hidden]="!image.weblinkUrl"
-                [src]="getImageUrl(image.weblinkUrl)"
+                [hidden]="!image.url"
+                [src]="image.url"
                 alt="portfolio"
                 style="width: auto; height: 170px;"
               />
@@ -157,7 +185,7 @@
             <td class="text-right">
               <button
                 class="btn btn-primary"
-                (click)="selectImage(image.weblinkUrl, $event)"
+                (click)="selectImage(image, $event)"
                 title="Select"
               >
                 Select
@@ -167,7 +195,7 @@
           </tr>
           <tr *ngIf="!images.length">
             <td colspan="5" class="text-center my-5">
-              <!--{{ "No Images Found" | i18nextFormat }}-->No Images Found
+              <!--{{"No Images Found" | i18nextFormat}}-->No Images Found
             </td>
           </tr>
         </tbody>

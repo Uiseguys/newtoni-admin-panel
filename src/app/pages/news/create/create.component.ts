@@ -24,7 +24,7 @@ export class CreateComponent implements OnInit {
         this.toasterService.popAsync(
           "success",
           "",
-          "Publication has been created"
+          "News post has been created"
         );
         this.router.navigate(["/dashboard/news"]);
       },

@@ -57,6 +57,10 @@ export class NewsService {
     return this.api.get(`/news/${id}`);
   }
 
+  getImage(id) {
+    return this.api.get(`/storage/file/${id}`);
+  }
+
   deleteNews(id) {
     return this.api.delete(`/news/${id}`);
   }

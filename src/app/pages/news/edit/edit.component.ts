@@ -12,6 +12,7 @@ import { NewsService } from "../news.service";
 export class EditComponent implements OnInit {
   error = "";
   news: any = {};
+  image = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -21,6 +22,13 @@ export class EditComponent implements OnInit {
   ) {
     this.route.params.subscribe(params => {
       this.api.getNews(params.id).subscribe(res => {
+        res.image = JSON.parse(res.image);
+        res.image = res.image.map(item => {
+          this.api.getImage(item.id).subscribe(res => {
+            item.url = res.url;
+          });
+          return item;
+        });
         this.news = res;
       });
     });

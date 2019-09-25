@@ -68,6 +68,12 @@ export class ListComponent implements OnInit {
       this.editions = res.map((item, index) => {
         tmp = date - Date.parse(res[index].create_time);
         item.create_time = this.timeDiff(tmp);
+
+        // Parse through string file sent from
+        item.image = JSON.parse(item.image);
+        this.api.getImage(item.image[0].id).subscribe(res => {
+          item.image = res.url;
+        });
         return item;
       });
     });

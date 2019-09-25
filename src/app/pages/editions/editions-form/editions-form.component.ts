@@ -27,7 +27,7 @@ import { BsModalService } from "ngx-bootstrap/modal";
 export class EditionsFormComponent implements OnInit, OnChanges {
   form: FormGroup;
   error = "";
-  image = "";
+  image = [];
   images = [];
 
   modalRef: any;
@@ -87,7 +87,12 @@ export class EditionsFormComponent implements OnInit, OnChanges {
     if (!this.form.valid) return;
     this.onSubmit.emit({
       ...this.form.value,
-      image: this.image
+      image: JSON.stringify(
+        this.image.map(item => {
+          delete item.url; // Remove signed url from this object
+          return item;
+        })
+      )
     });
   }
 
@@ -99,10 +104,17 @@ export class EditionsFormComponent implements OnInit, OnChanges {
     this.modalRef = this.modalService.show(template);
   }
 
-  selectImage(url, $event) {
+  selectImage(image, $event) {
     $event.preventDefault();
-    this.image = `${this.settings.API_URL}${url}`;
+    this.image.push(image);
+    //this.image = `${this.settings.API_URL}${url}`;
     this.modalRef.hide();
+  }
+
+  deleteImage(image) {
+    if (!confirm("Are you sure to delete")) return;
+    const index = this.image.indexOf(image);
+    this.image.splice(index, 1);
   }
 
   getImageUrl(url) {

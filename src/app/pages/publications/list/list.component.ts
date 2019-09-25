@@ -25,7 +25,14 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.api.getAll().subscribe(res => {
-      this.publications = res;
+      this.publications = res.map((item, index) => {
+        // Parse through string file sent from
+        item.image = JSON.parse(item.image);
+        this.api.getImage(item.image[0].id).subscribe(res => {
+          item.image = res.url;
+        });
+        return item;
+      });
     });
   }
 

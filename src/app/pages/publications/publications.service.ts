@@ -60,6 +60,10 @@ export class PublicationsService {
     return this.api.get(`/publications/${id}`);
   }
 
+  getImage(id) {
+    return this.api.get(`/storage/file/${id}`);
+  }
+
   deletePublication(id) {
     return this.api.delete(`/publications/${id}`);
   }

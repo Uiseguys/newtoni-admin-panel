@@ -57,6 +57,10 @@ export class EditionsService {
     return this.api.get(`/editions/${id}`);
   }
 
+  getImage(id) {
+    return this.api.get(`/storage/file/${id}`);
+  }
+
   deleteEdition(id) {
     return this.api.delete(`/editions/${id}`);
   }
