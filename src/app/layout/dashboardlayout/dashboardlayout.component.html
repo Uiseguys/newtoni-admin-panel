@@ -103,8 +103,8 @@
             aria-haspopup="true"
             aria-expanded="false"
           >
-            <!--{{user[0].email}}-->
-            Admin
+            {{ user.email }}
+            <!--Admin-->
           </span>
           <div class="dropdown-menu">
             <a class="dropdown-item" [routerLink]="'/dashboard/settings'">

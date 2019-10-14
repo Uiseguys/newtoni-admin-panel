@@ -39,6 +39,7 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy {
     private settingApi: SettingService
   ) {
     this.user = config.getAppSetting("user");
+    console.log(this.user);
     this.lang = localStorage.getItem("stanapplang") || "de";
   }
 
