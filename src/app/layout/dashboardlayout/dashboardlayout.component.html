@@ -97,22 +97,21 @@
         <!--</div>-->
 
         <div class="btn-group">
-          <!--<span-->
-          <!--class="dropdown-toggle cp"-->
-          <!--data-toggle="dropdown"-->
-          <!--aria-haspopup="true"-->
-          <!--aria-expanded="false"-->
-          <!-->-->
-          <!--{{ user[0].email }}-->
-          <!--</span>-->
+          <span
+            class="dropdown-toggle cp"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <!--{{user[0].email}}-->
+            Admin
+          </span>
           <div class="dropdown-menu">
-            <a class="dropdown-item" [routerLink]="'/dashboard/settings'"
-              >{{
-              <!--"Settings" | i18nextFormat-->"Settings" }}</a
+            <a class="dropdown-item" [routerLink]="'/dashboard/settings'">
+              <!--"Settings" | i18nextFormat-->Settings</a
             >
-            <a class="dropdown-item cp" (click)="logout($event)"
-              >{{
-              <!--"Logout" | i18nextFormat-->"Logout" }}</a
+            <a class="dropdown-item cp" (click)="logout($event)">
+              <!--"Logout" | i18nextFormat-->Logout</a
             >
           </div>
         </div>
