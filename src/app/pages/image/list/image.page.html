@@ -23,13 +23,13 @@
           <div class="image">
             <img
               [hidden]="!image.url"
-              [src]="image.url"
+              [src]="getImageUrl(image.url)"
               alt="portfolio"
               style="width: auto; height: 170px;"
             />
           </div>
           <td>
-            {{ image.url }}
+            {{ getImageUrl(image.url) }}
           </td>
           <td class="text-right">
             <button

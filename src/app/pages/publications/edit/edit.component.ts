@@ -23,12 +23,6 @@ export class EditComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.api.getPublication(params.id).subscribe(res => {
         res.image = JSON.parse(res.image);
-        res.image = res.image.map(item => {
-          this.api.getImage(item.id).subscribe(res => {
-            item.url = res.url;
-          });
-          return item;
-        });
         this.publication = res;
       });
     });

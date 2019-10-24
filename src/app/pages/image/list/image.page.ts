@@ -58,10 +58,9 @@ export class ImagePage implements OnInit {
   }
 
   loadImages() {
-    this.images = this.api.getAllImages(
-      this.page,
-      this.pageConfig.itemsPerPage
-    );
+    this.images = this.api.getAllImages();
+    //this.page,
+    //this.pageConfig.itemsPerPage
   }
 
   getImages(page: number) {
@@ -84,8 +83,16 @@ export class ImagePage implements OnInit {
     return "-";
   }
 
-  refreshList($event) {
-    this.toasterService.popAsync("success", "", "Image has been uploaded");
-    this.loadImages();
+  async refreshList($event) {
+    await this.toasterService.popAsync(
+      "success",
+      "",
+      "Image has been uploaded"
+    );
+    this.images = await this.api.getAllImages();
+    //this.images = await this.api.getAllImages(
+    //this.page,
+    //this.pageConfig.itemsPerPage
+    //);
   }
 }

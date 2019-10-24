@@ -94,13 +94,7 @@ export class PublicationsFormComponent implements OnInit, OnChanges {
     }
     if (!this.form.valid) return;
     this.onSubmit.emit({
-      ...this.form.value,
-      image: JSON.stringify(
-        this.image.map(item => {
-          delete item.url; // Remove signed url from this object
-          return item;
-        })
-      )
+      ...this.form.value, image: JSON.stringify(this.image)
     });
   }
 
@@ -127,8 +121,7 @@ export class PublicationsFormComponent implements OnInit, OnChanges {
 
   getImageUrl(url) {
     if (url) {
-      return url;
-      //return `${this.settings.API_URL}${url}`;
+      return `${this.settings.API_URL}${url}`;
     }
     return "-";
   }

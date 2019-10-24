@@ -71,22 +71,20 @@ export class ListComponent implements OnInit {
 
         // Parse through string file sent from
         item.image = JSON.parse(item.image);
-        this.api.getImage(item.image[0].id).subscribe(res => {
-          item.image = res.url;
-        });
+        item.image = item.image[0].url;
         return item;
       });
     });
   }
 
-  deleteEdition(edition) {
+  deleteEdition(id) {
     if (!confirm("Are you sure to delete")) {
       return;
     }
 
-    this.api.deleteEdition(edition.id).subscribe(
+    this.api.deleteEdition(id).subscribe(
       res => {
-        this.editions = this.editions.filter(item => item.id != edition.id);
+        this.editions = this.editions.filter(item => item.id != id);
       },
       res => {
         const error = JSON.parse(res._body);
@@ -94,6 +92,13 @@ export class ListComponent implements OnInit {
           (error.error && error.error.message) || "Sorry, something is wrong";
       }
     );
+  }
+
+  getImageUrl(url) {
+    if (url) {
+      return `${this.settings.API_URL}${url}`;
+    }
+    return "-";
   }
 
   getRoleName(role) {

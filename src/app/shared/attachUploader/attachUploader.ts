@@ -102,8 +102,8 @@ export class AttachUploader implements OnInit {
 
     this.route.params.subscribe(params => {
       this.uploader.setOptions({
-        url: this.settings.API_URL + `/storage/upload/`,
-        //authToken: this.settings.getStorage("token"),
+        url: this.settings.API_URL + `/resources/upload/`,
+        authToken: this.settings.getStorage("token"),
         allowedMimeType: this.mimeTypes
       });
     });

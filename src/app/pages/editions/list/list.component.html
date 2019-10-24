@@ -15,7 +15,7 @@
         <div class="image">
           <img
             [hidden]="!edition.image"
-            [src]="edition.image"
+            [src]="getImageUrl(edition.image)"
             alt="portfolio"
             style="max-width: 100%"
           />
@@ -35,7 +35,7 @@
         >
           <i class="fa fa-edit"></i>
         </a>
-        <a class="text-danger cp ml-3" (click)="deleteEdition(edition)">
+        <a class="text-danger cp ml-3" (click)="deleteEdition(edition.id)">
           <i class="fa fa-trash"></i>
         </a>
       </div>

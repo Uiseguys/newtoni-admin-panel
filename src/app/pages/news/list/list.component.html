@@ -16,7 +16,7 @@
         <div class="image">
           <img
             [hidden]="!news.image"
-            [src]="news.image"
+            [src]="getImageUrl(news.image)"
             alt="portfolio"
             style="max-width: 100%"
           />
@@ -33,7 +33,7 @@
         <a [routerLink]="'/dashboard/news/' + news.id" class="text-success">
           <i class="fa fa-edit"></i>
         </a>
-        <a class="text-danger cp ml-3" (click)="deleteNews(news)">
+        <a class="text-danger cp ml-3" (click)="deleteNews(news.id)">
           <i class="fa fa-trash"></i>
         </a>
       </div>

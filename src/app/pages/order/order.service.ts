@@ -15,7 +15,7 @@ export class OrderService {
       or: [{ completed: { neq: null } }, { type: 'email' }]
     };
 
-    return this.api.get(`/Orders/count?where=${JSON.stringify(filter)}`);
+    return this.api.get(`/orders/count?where=${JSON.stringify(filter)}`);
   }
 
   getOrders(type, page = 1, pageSize = 20) {
@@ -27,7 +27,7 @@ export class OrderService {
         or: [{ completed: { neq: null } }, { type: 'email' }]
       }
     };
-    return this.api.get(`/Orders?filter=${JSON.stringify(filter)}`);
+    return this.api.get(`/orders?filter=${JSON.stringify(filter)}`);
   }
 
   searchOrders(type, key) {
@@ -39,23 +39,23 @@ export class OrderService {
         // }
       }
     };
-    return this.api.get(`/Orders?filter=${JSON.stringify(filter)}`);
+    return this.api.get(`/orders?filter=${JSON.stringify(filter)}`);
   }
 
   createOrder(info) {
-    return this.api.post('/Orders', info);
+    return this.api.post('/orders', info);
   }
 
   updateOrder(id, info) {
-    return this.api.patch(`/Orders/${id}`, info);
+    return this.api.patch(`/orders/${id}`, info);
   }
 
   getOrder(id) {
     const filter = {};
-    return this.api.get(`/Orders/${id}?filter=${JSON.stringify(filter)}`);
+    return this.api.get(`/orders/${id}?filter=${JSON.stringify(filter)}`);
   }
 
   deleteOrder(id) {
-    return this.api.delete(`/Orders/${id}`);
+    return this.api.delete(`/orders/${id}`);
   }
 }

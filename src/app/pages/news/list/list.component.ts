@@ -49,7 +49,7 @@ export class ListComponent implements OnInit {
       ms = Math.round(ms);
       return `${ms} ${ms < 2 ? "min" : "mins"}`;
     } else if (bigInt(ms).geq(1000)) {
-      // Check minutes
+      // Check seconds
       return Math.round(ms / 1000) + "s";
     }
   };
@@ -71,22 +71,23 @@ export class ListComponent implements OnInit {
 
         // Parse through string file sent from
         item.image = JSON.parse(item.image);
-        this.api.getImage(item.image[0].id).subscribe(res => {
-          item.image = res.url;
-        });
+        item.image = item.image[0].url
+        // this.api.getImage(item.image[0].id).subscribe(res => {
+        //   item.image = res.url;
+        // });
         return item;
       });
     });
   }
 
-  deleteNews(news) {
+  deleteNews(id) {
     if (!confirm("Are you sure to delete")) {
       return;
     }
 
-    this.api.deleteNews(news.id).subscribe(
+    this.api.deleteNews(id).subscribe(
       res => {
-        this.news = this.news.filter(item => item.id != news.id);
+        this.news = this.news.filter(item => item.id != id);
       },
       res => {
         const error = JSON.parse(res._body);
@@ -94,6 +95,13 @@ export class ListComponent implements OnInit {
           (error.error && error.error.message) || "Sorry, something is wrong";
       }
     );
+  }
+
+  getImageUrl(url) {
+    if (url) {
+      return `${this.settings.API_URL}${url}`;
+    }
+    return "-";
   }
 
   getRoleName(role) {

@@ -28,23 +28,21 @@ export class ListComponent implements OnInit {
       this.publications = res.map((item, index) => {
         // Parse through string file sent from
         item.image = JSON.parse(item.image);
-        this.api.getImage(item.image[0].id).subscribe(res => {
-          item.image = res.url;
-        });
+        item.image = item.image[0].url;
         return item;
       });
     });
   }
 
-  deletePublication(publication) {
+  deletePublication(id) {
     if (!confirm("Are you sure to delete")) {
       return;
     }
 
-    this.api.deletePublication(publication.id).subscribe(
+    this.api.deletePublication(id).subscribe(
       res => {
         this.publications = this.publications.filter(
-          item => item.id != publication.id
+          item => item.id != id
         );
       },
       res => {
@@ -53,6 +51,13 @@ export class ListComponent implements OnInit {
           (error.error && error.error.message) || "Sorry, something is wrong";
       }
     );
+  }
+
+  getImageUrl(url) {
+    if (url) {
+      return `${this.settings.API_URL}${url}`;
+    }
+    return "-";
   }
 
   getRoleName(role) {

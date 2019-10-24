@@ -17,7 +17,7 @@
         <div class="image">
           <img
             [hidden]="!publication.image"
-            [src]="publication.image"
+            [src]="getImageUrl(publication.image)"
             alt="portfolio"
             style="max-width: 100%"
           />
@@ -37,7 +37,7 @@
         >
           <i class="fa fa-edit"></i>
         </a>
-        <a class="text-danger cp ml-3" (click)="deletePublication(publication)">
+        <a class="text-danger cp ml-3" (click)="deletePublication(publication.id)">
           <i class="fa fa-trash"></i>
         </a>
       </div>

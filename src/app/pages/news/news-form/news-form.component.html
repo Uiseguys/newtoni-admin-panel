@@ -99,7 +99,7 @@
                 <div class="image">
                   <img
                     [hidden]="!img.url"
-                    [src]="img.url"
+                    [src]="getImageUrl(img.url)"
                     alt="portfolio"
                     style="width: auto; height: 170px;"
                   />
@@ -174,7 +174,7 @@
             <div class="image">
               <img
                 [hidden]="!image.url"
-                [src]="image.url"
+                [src]="getImageUrl(image.url)"
                 alt="portfolio"
                 style="width: auto; height: 170px;"
               />
