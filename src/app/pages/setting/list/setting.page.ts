@@ -37,7 +37,6 @@ export class SettingPage implements OnInit, OnDestroy {
       item = res.find(item => item.key === "email");
       this.emailSetting = item ? item.value : {};
     });
-    console.log(this.settings);
   }
 
   ngOnDestroy() {}
@@ -54,13 +53,14 @@ export class SettingPage implements OnInit, OnDestroy {
   }
 
   updateEmailSetting() {
-    this.api.updateSetting("settings", this.settings).subscribe(res => {
+    this.api.updateSetting("email", this.emailSetting).subscribe(res => {
+      console.log(this.settings)
       this.toasterService.popAsync(
         "success",
         "",
         "Email Address Settings have been updated"
       );
-      this.config.setAppSetting("settings", this.settings);
+      this.config.setAppSetting("email", this.emailSetting);
     });
   }
 }

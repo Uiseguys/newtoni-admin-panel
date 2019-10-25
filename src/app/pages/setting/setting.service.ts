@@ -37,7 +37,7 @@ export class SettingService {
 
   updateSetting(key, value) {
     const where = { key };
-    return this.api.post(`/settings?where=${JSON.stringify(where)}`, {
+    return this.api.patch(`/settings?where=${JSON.stringify(where)}`, {
       key,
       value
     });
