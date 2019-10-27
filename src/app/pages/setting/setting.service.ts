@@ -16,6 +16,7 @@ export class SettingService {
   getCount() {
     return this.api.get("/settings/count");
   }
+  
   getSetting(key) {
     const filter = {
       where: { key }

@@ -39,7 +39,6 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy {
     private settingApi: SettingService
   ) {
     this.user = config.getAppSetting("user");
-    console.log(this.user);
     this.lang = localStorage.getItem("stanapplang") || "de";
   }
 
@@ -67,6 +66,7 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy {
     this.timer = setInterval(() => {
       this.settingApi.getSetting("netlifyHook").subscribe(res => {
         if (!res.length) return;
+        console.log(res[0].value);
 
         const detail = res[0].value;
         if (detail.state === "ready") {
