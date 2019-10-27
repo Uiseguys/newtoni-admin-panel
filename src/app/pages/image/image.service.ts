@@ -19,7 +19,7 @@ export class ImageService {
 
   getAllImages(page = 1, pageSize = 500) {
     const filter = {
-      skip: page > 0 ? (page - 1) * pageSize : 0,
+      skip: page > 0 ? (page - 1) : 0,
       limit: pageSize
     };
     return this.api.get(`/resources/all?filter=${JSON.stringify(filter)}`);

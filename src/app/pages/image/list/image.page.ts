@@ -50,21 +50,28 @@ export class ImagePage implements OnInit {
       this.api.getImageCount().subscribe(res => {
         this.pageConfig.totalItems = res.count;
       });
-
-      this.page = page;
-      this.images = this.api.getAllImages();
-      this.pageConfig.currentPage = page;
+      this.page = page,
+      this.pageConfig.currentPage = page
+      this.images = this.api.getAllImages(
+        this.page,
+        this.pageConfig.itemsPerPage
+      );
     });
   }
-
+  
   loadImages() {
-    this.images = this.api.getAllImages();
-    //this.page,
-    //this.pageConfig.itemsPerPage
+    this.images = this.api.getAllImages(
+      this.page,
+      this.pageConfig.itemsPerPage
+    );
   }
 
-  getImages(page: number) {
-    this.router.navigate(["/dashboard/images"], { queryParams: { page } });
+  async getImages(page: number) {
+    await this.router.navigate(["/dashboard/images"], { queryParams: { page } });
+    this.images = this.api.getAllImages(
+      page,
+      this.pageConfig.itemsPerPage
+    );
   }
 
   deleteImage(id) {
@@ -84,15 +91,10 @@ export class ImagePage implements OnInit {
   }
 
   async refreshList($event) {
-    await this.toasterService.popAsync(
-      "success",
-      "",
-      "Image has been uploaded"
+    await this.toasterService.popAsync("success", "", "Image has been uploaded");
+    this.images = await this.api.getAllImages(
+      this.page,
+      this.pageConfig.itemsPerPage
     );
-    this.images = await this.api.getAllImages();
-    //this.images = await this.api.getAllImages(
-    //this.page,
-    //this.pageConfig.itemsPerPage
-    //);
   }
 }

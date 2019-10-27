@@ -171,12 +171,12 @@
                 </thead> -->
         <tbody>
           <tr *ngFor="let image of images">
-            <div class="image">
+            <div class="image" style="max-width: 100%">
               <img
                 [hidden]="!image.url"
                 [src]="getImageUrl(image.url)"
                 alt="portfolio"
-                style="width: auto; height: 170px;"
+                style="max-width: 100%; height: 170px;"
               />
             </div>
             <!-- <td>
