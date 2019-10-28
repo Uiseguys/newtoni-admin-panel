@@ -107,5 +107,50 @@
         </div>
       </div>
     </fieldset>
+
+    <fieldset>
+      <legend><!--{{ "Newsletters" | i18nextFormat }}-->Newsletters</legend>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">
+          <!--{{ "Subject" | i18nextFormat }}-->New Subscriber Subject
+        </label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            name="newSubscriberSubject"
+            [(ngModel)]="newsletterSetting.newSubscriberSubject"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">
+          <!--{{ "New Subscriber Message" | i18nextFormat }}-->New Subscriber
+          Message
+        </label>
+        <div class="col-sm-10">
+          <textarea
+            class="form-control"
+            name="newSubscriberMessage"
+            [(ngModel)]="newsletterSetting.newSubscriberMessage"
+            autocomplete="off"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="form-group mt-3 row">
+        <div class="col-sm-10 offset-sm-2 d-flex">
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="updateNewsletterSetting()"
+          >
+            <!--{{ "Update" | i18nextFormat }}-->Update
+          </button>
+        </div>
+      </div>
+    </fieldset>
   </form>
 </div>

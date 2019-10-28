@@ -16,7 +16,7 @@ export class SettingService {
   getCount() {
     return this.api.get("/settings/count");
   }
-  
+
   getSetting(key) {
     const filter = {
       where: { key }
@@ -38,7 +38,7 @@ export class SettingService {
 
   updateSetting(key, value) {
     const where = { key };
-    return this.api.patch(`/settings?where=${JSON.stringify(where)}`, {
+    return this.api.post(`/settings?where=${JSON.stringify(where)}`, {
       key,
       value
     });

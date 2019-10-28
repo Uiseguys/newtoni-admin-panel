@@ -18,6 +18,7 @@ export class SettingPage implements OnInit, OnDestroy {
     netlifySiteID: ""
   };
   emailSetting: any = {};
+  newsletterSetting: any = {};
 
   hook: any = null;
   timer: any = null;
@@ -36,6 +37,9 @@ export class SettingPage implements OnInit, OnDestroy {
 
       item = res.find(item => item.key === "email");
       this.emailSetting = item ? item.value : {};
+
+      item = res.find(item => item.key === "newsletter");
+      this.newsletterSetting = item ? item.value : {};
     });
   }
 
@@ -54,7 +58,7 @@ export class SettingPage implements OnInit, OnDestroy {
 
   updateEmailSetting() {
     this.api.updateSetting("email", this.emailSetting).subscribe(res => {
-      console.log(this.settings)
+      console.log(this.settings);
       this.toasterService.popAsync(
         "success",
         "",
@@ -62,5 +66,18 @@ export class SettingPage implements OnInit, OnDestroy {
       );
       this.config.setAppSetting("email", this.emailSetting);
     });
+  }
+
+  updateNewsletterSetting() {
+    this.api
+      .updateSetting("newsletter", this.newsletterSetting)
+      .subscribe(res => {
+        this.toasterService.popAsync(
+          "success",
+          "",
+          "Newsletter Settings have been updated"
+        );
+        this.config.setAppSetting("newsletter", this.newsletterSetting);
+      });
   }
 }
