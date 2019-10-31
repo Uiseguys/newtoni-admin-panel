@@ -13,7 +13,7 @@ export class ImageService {
   // ---------- product api ----------
   getImageCount() {
     const filter = {};
-    //return this.api.get("/resources/count?where=${JSON.stringify(filter)}");
+    //  return this.api.get("/resources/count?where=${JSON.stringify(filter)}");
     return this.api.get("/resources/count");
   }
 

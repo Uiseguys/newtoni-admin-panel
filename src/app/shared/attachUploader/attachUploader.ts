@@ -47,7 +47,7 @@ export class AttachUploader implements OnInit {
       url: this.settings.API_URL,
       disableMultipart: false,
       method: "post",
-      //authToken: this.settings.getStorage("token"),
+      authToken: this.settings.getStorage("token"),
       allowedMimeType: this.mimeTypes
     });
 
@@ -59,8 +59,7 @@ export class AttachUploader implements OnInit {
     ) => {
       this.uploader.clearQueue();
       const result = JSON.parse(response);
-
-      result.weblinkUrl = this.settings.API_URL + result.weblinkUrl;
+      // result.weblinkUrl = this.settings.API_URL + response.weblinkUrl;
       this.onChange.emit(result);
     };
 
@@ -102,6 +101,7 @@ export class AttachUploader implements OnInit {
 
     this.route.params.subscribe(params => {
       this.uploader.setOptions({
+        // url: this.settings.API_URL + `/resources/${params.type}/upload`,
         url: this.settings.API_URL + `/resources/upload/`,
         authToken: this.settings.getStorage("token"),
         allowedMimeType: this.mimeTypes

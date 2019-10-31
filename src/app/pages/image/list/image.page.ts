@@ -26,6 +26,7 @@ export class ImagePage implements OnInit {
 
   modalRef: any;
   selectedId = 0;
+  count = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -34,7 +35,7 @@ export class ImagePage implements OnInit {
     private api: ImageService,
     private modalService: BsModalService,
     private settings: SettingsService,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
   ) {
     this.form = fb.group({
       displayName: [""],
@@ -51,11 +52,11 @@ export class ImagePage implements OnInit {
         this.pageConfig.totalItems = res.count;
       });
       this.page = page,
-      this.pageConfig.currentPage = page
       this.images = this.api.getAllImages(
         this.page,
         this.pageConfig.itemsPerPage
       );
+      this.pageConfig.currentPage = page
     });
   }
   
@@ -91,7 +92,7 @@ export class ImagePage implements OnInit {
   }
 
   async refreshList($event) {
-    await this.toasterService.popAsync("success", "", "Image has been uploaded");
+    await this.toasterService.popAsync('success', '', 'Image has been uploaded');
     this.images = await this.api.getAllImages(
       this.page,
       this.pageConfig.itemsPerPage

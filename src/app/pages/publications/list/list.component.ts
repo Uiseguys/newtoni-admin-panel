@@ -28,7 +28,11 @@ export class ListComponent implements OnInit {
       this.publications = res.map((item, index) => {
         // Parse through string file sent from
         item.image = JSON.parse(item.image);
-        item.image = item.image[0].url;
+        if (item.image.length > 0) {
+          item.image = item.image[0].url
+        } else {
+          item.image = []
+        }
         return item;
       });
     });
