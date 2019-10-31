@@ -93,9 +93,9 @@ export class ImagePage implements OnInit {
 
   async refreshList($event) {
     await this.toasterService.popAsync('success', '', 'Image has been uploaded');
-    this.images = await this.api.getAllImages(
-      this.page,
-      this.pageConfig.itemsPerPage
-    );
+    const checkImages = async () => {
+      await this.loadImages();
+    }
+    setTimeout(checkImages, 1000);
   }
 }
