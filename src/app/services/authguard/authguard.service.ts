@@ -1,7 +1,7 @@
 /**
  * Created by Tall Prince on 5/27/2017.
  */
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   Router,
   Resolve,
@@ -10,47 +10,33 @@ import {
   CanLoad,
   Route,
   CanActivate
-} from '@angular/router';
-import { Observable } from 'rxjs';
-import { ClientApiService } from '../../services/api/clientapi.service';
-import { SettingsService } from '../../services/settings/settings.service';
+} from "@angular/router";
+import { Observable } from "rxjs";
+import { ClientApiService } from "../api/clientapi.service";
+import { SettingsService } from "../settings/settings.service";
+import { GoTrueJs } from "../netlify/gotrue-js.service";
 
 @Injectable()
 export class AuthGuardResolve implements Resolve<any>, CanLoad, CanActivate {
+  user;
   constructor(
     private router: Router,
     private settings: SettingsService,
-    private api: ClientApiService
+    private api: ClientApiService,
+    private gotrue: GoTrueJs
   ) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<any> {
-    // check role
     return new Promise((resolve, reject) => {
-      if (
-        this.settings.getStorage('token') &&
-        this.settings.getStorage('userId')
-      ) {
-        this.api.getUserInfo(this.settings.getStorage('userId')).subscribe(
-          res => {
-            if (res.roles) {
-              res.roles = res.roles.map(item => item.name);
-            }
-            res.token = this.settings.getStorage('token');
-            this.settings.setAppSetting('user', res);
-            resolve(res);
-          },
-          err => {
-            this.settings.clearSetting();
-            this.router.navigate(['/login']);
-          }
-        );
+      const user = this.gotrue.currentUser();
+      if (user) {
+        resolve(user);
       } else {
-        this.settings.clearSetting();
-        reject('Permission denied');
-        this.router.navigate(['/login']);
+        reject("Dashboard Permission Denied");
+        this.router.navigate(["/login"]);
       }
     });
   }
@@ -64,10 +50,10 @@ export class AuthGuardResolve implements Resolve<any>, CanLoad, CanActivate {
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
     if (
-      this.settings.getStorage('token') &&
-      this.settings.getStorage('userId')
+      this.settings.getStorage("token") &&
+      this.settings.getStorage("userId")
     ) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(["/dashboard"]);
       return false;
     }
     return true;
