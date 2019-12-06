@@ -31,7 +31,7 @@ export class AuthGuardResolve implements Resolve<any>, CanLoad, CanActivate {
     state: RouterStateSnapshot
   ): Promise<any> {
     return new Promise((resolve, reject) => {
-      const user = this.gotrue.currentUser();
+      const user = this.gotrue.currentUser() || JSON.parse(localStorage.getItem("gotrue.user")) ;
       if (user) {
         resolve(user);
       } else {
@@ -50,8 +50,8 @@ export class AuthGuardResolve implements Resolve<any>, CanLoad, CanActivate {
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
     if (
-      this.settings.getStorage("token") &&
-      this.settings.getStorage("userId")
+      this.gotrue.currentUser() ||
+      JSON.parse(localStorage.getItem("gotrue.user"))
     ) {
       this.router.navigate(["/dashboard"]);
       return false;
