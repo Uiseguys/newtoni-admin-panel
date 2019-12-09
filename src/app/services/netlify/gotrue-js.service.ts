@@ -7,7 +7,7 @@ export class GoTrueJs {
   auth;
   constructor() {
     this.auth = new GoTrue({
-      APIUrl: "https://newtoni-admin.netlify.com/.netlify/identity",
+      APIUrl: "https://newtoni-admin-panel.netlify.com/.netlify/identity",
       audience: "",
       setCookie: true
     });
