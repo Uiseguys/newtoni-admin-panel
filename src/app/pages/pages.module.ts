@@ -25,24 +25,24 @@ export const routes = [
       { path: "", redirectTo: "/dashboard/news", pathMatch: "full" },
       {
         path: "news",
-        loadChildren: "./news/news.module#NewsModule"
+        loadChildren: () => import('./news/news.module').then(m => m.NewsModule)
       },
       {
         path: "editions",
-        loadChildren: "./editions/editions.module#EditionsModule"
+        loadChildren: () => import('./editions/editions.module').then(m => m.EditionsModule)
       },
       {
         path: "publications",
-        loadChildren: "./publications/publications.module#PublicationsModule"
+        loadChildren: () => import('./publications/publications.module').then(m => m.PublicationsModule)
       },
-      { path: "payments", loadChildren: "./order/order.module#OrderModule" },
+      { path: "payments", loadChildren: () => import('./order/order.module').then(m => m.OrderModule) },
       {
         path: "images",
-        loadChildren: "./image/image.module#ImageModule"
+        loadChildren: () => import('./image/image.module').then(m => m.ImageModule)
       },
       {
         path: "settings",
-        loadChildren: "./setting/setting.module#SettingModule"
+        loadChildren: () => import('./setting/setting.module').then(m => m.SettingModule)
       }
     ]
   },
