@@ -1,9 +1,4 @@
-import {
-  NgModule,
-  ModuleWithProviders,
-  Optional,
-  SkipSelf
-} from "@angular/core";
+import { NgModule, ModuleWithProviders } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
@@ -12,19 +7,16 @@ import { ModalModule } from "ngx-bootstrap/modal";
 import { TooltipModule } from "ngx-bootstrap/tooltip";
 import { CollapseModule } from "ngx-bootstrap/collapse";
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
-import { SelectModule } from "ng2-select";
+import { NgSelectModule } from "@ng-select/ng-select";
 import { FileUploadModule } from "ng2-file-upload";
-//import { I18NextModule } from 'angular-i18next';
 import { ToasterModule } from "angular2-toaster";
-
 import { AttachUploader } from "./attachUploader/attachUploader";
 
 import { SettingsService } from "../services/settings/settings.service";
 import { Api } from "../services/api/api.service";
 import { ClientApiService } from "../services/api/clientapi.service";
 import { AuthGuardResolve } from "../services/authguard/authguard.service";
-
-//import { I18NextFormatPipe } from './pipes/i18next.pipe';
+import { I18NextFormatPipe } from "./pipes/i18next.pipe";
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -34,7 +26,7 @@ import { AuthGuardResolve } from "../services/authguard/authguard.service";
     ReactiveFormsModule,
     RouterModule,
     NgxPaginationModule,
-    SelectModule,
+    NgSelectModule,
     FileUploadModule,
     CollapseModule.forRoot(),
     ModalModule.forRoot(),
@@ -43,23 +35,22 @@ import { AuthGuardResolve } from "../services/authguard/authguard.service";
     ToasterModule
   ],
   providers: [AuthGuardResolve],
-  //declarations: [I18NextFormatPipe, AttachUploader],
-  declarations: [AttachUploader],
+  declarations: [I18NextFormatPipe, AttachUploader],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
     NgxPaginationModule,
-    SelectModule,
+    NgSelectModule,
     FileUploadModule,
     ModalModule,
     TooltipModule,
     CollapseModule,
     BsDropdownModule,
     ToasterModule,
-    AttachUploader
-    //I18NextFormatPipe
+    AttachUploader,
+    I18NextFormatPipe
   ]
 })
 

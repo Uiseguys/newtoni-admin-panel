@@ -27,12 +27,7 @@ export class ListComponent implements OnInit {
     this.api.getAll().subscribe(res => {
       this.publications = res.map((item, index) => {
         // Parse through string file sent from
-        item.image = JSON.parse(item.image);
-        if (item.image.length > 0) {
-          item.image = item.image[0].url
-        } else {
-          item.image = []
-        }
+        item["image"] = item["image"] ? JSON.parse(item.image) : [];
         return item;
       });
     });
@@ -45,9 +40,7 @@ export class ListComponent implements OnInit {
 
     this.api.deletePublication(id).subscribe(
       res => {
-        this.publications = this.publications.filter(
-          item => item.id != id
-        );
+        this.publications = this.publications.filter(item => item.id != id);
       },
       res => {
         const error = JSON.parse(res._body);

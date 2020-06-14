@@ -86,7 +86,8 @@ export class EditionsFormComponent implements OnInit, OnChanges {
     }
     if (!this.form.valid) return;
     this.onSubmit.emit({
-      ...this.form.value, image: JSON.stringify(this.image)
+      ...this.form.value,
+      image: JSON.stringify(this.image)
     });
   }
 
@@ -98,10 +99,10 @@ export class EditionsFormComponent implements OnInit, OnChanges {
     this.modalRef = this.modalService.show(template);
   }
 
-  selectImage(image, $event) {
+  selectImage(selectedImage, $event) {
     $event.preventDefault();
-    this.image.push(image);
-    //this.image = `${this.settings.API_URL}${url}`;
+    this.image.push(selectedImage.public_id);
+    console.log(this.image);
     this.modalRef.hide();
   }
 
@@ -109,12 +110,6 @@ export class EditionsFormComponent implements OnInit, OnChanges {
     if (!confirm("Are you sure to delete")) return;
     const index = this.image.indexOf(image);
     this.image.splice(index, 1);
-  }
-
-  getImageUrl(url) {
-    if (url) {
-      return `${this.settings.API_URL}${url}`;
-    }
-    return "-";
+    console.log(this.image);
   }
 }

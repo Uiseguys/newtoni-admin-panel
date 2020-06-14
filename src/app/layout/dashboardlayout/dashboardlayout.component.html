@@ -1,10 +1,8 @@
 <div class="container page-wrapper p-0">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand"
-      >New Toni Press
-      <!--{{"Admin Panel" | i18nextFormat}}-->
-      Admin Panel</a
-    >
+      >New Toni Press {{ "Admin Panel" | i18nextFormat }}
+    </a>
     <button
       class="navbar-toggler"
       type="button"
@@ -21,27 +19,27 @@
       <ul class="navbar-nav">
         <li class="nav-item" [routerLinkActive]="['active']">
           <a class="nav-link" [routerLink]="'/dashboard/news'">
-            <!--{{"News" | i18nextFormat}}-->News</a
+            {{ "News" | i18nextFormat }}</a
           >
         </li>
         <li class="nav-item" [routerLinkActive]="['active']">
           <a class="nav-link" [routerLink]="'/dashboard/editions'">
-            <!--{{"Editions" | i18nextFormat}}-->Editions</a
+            {{ "Editions" | i18nextFormat }}</a
           >
         </li>
         <li class="nav-item" [routerLinkActive]="['active']">
           <a class="nav-link" [routerLink]="'/dashboard/publications'">
-            <!--{{"Publications" | i18nextFormat}}-->Publications</a
+            {{ "Publications" | i18nextFormat }}</a
           >
         </li>
         <li class="nav-item" [routerLinkActive]="['active']">
           <a class="nav-link" [routerLink]="'/dashboard/payments'">
-            <!--{{"Payments" | i18nextFormat}}-->Payments</a
+            {{ "Payments" | i18nextFormat }}</a
           >
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="'/dashboard/images'">
-            <!--{{"Images" | i18nextFormat}}-->Images</a
+            {{ "Images" | i18nextFormat }}</a
           >
         </li>
       </ul>
@@ -77,24 +75,24 @@
       </div>
 
       <div class=" ml-auto">
-        <!--<div class="btn-group mr-2">-->
-        <!--<span-->
-        <!--class="dropdown-toggle cp"-->
-        <!--data-toggle="dropdown"-->
-        <!--aria-haspopup="true"-->
-        <!--aria-expanded="false"-->
-        <!-->-->
-        <!--{{ lang == "en" ? "English" : ("Deutsch" | i18nextFormat) }}-->
-        <!--</span>-->
-        <!--<div class="dropdown-menu">-->
-        <!--<a class="dropdown-item cp" (click)="changeLanguage('en')">{{-->
-        <!--"English" | i18nextFormat-->
-        <!--}}</a>-->
-        <!--[><a class="dropdown-item cp" (click)="changeLanguage('de')">{{<]-->
-        <!--[>"Deutsch" | i18nextFormat<]-->
-        <!--[>}}</a><]-->
-        <!--</div>-->
-        <!--</div>-->
+        <div class="btn-group mr-2">
+          <span
+            class="dropdown-toggle cp"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            {{ lang == "en" ? "English" : ("Deutsch" | i18nextFormat) }}
+          </span>
+          <div class="dropdown-menu">
+            <a class="dropdown-item cp" (click)="changeLanguage('en')">{{
+              "English" | i18nextFormat
+            }}</a>
+            <a class="dropdown-item cp" (click)="changeLanguage('de')">{{
+              "Deutsch" | i18nextFormat
+            }}</a>
+          </div>
+        </div>
 
         <div class="btn-group">
           <span
@@ -104,14 +102,13 @@
             aria-expanded="false"
           >
             {{ user.email }}
-            <!--Admin-->
           </span>
           <div class="dropdown-menu">
             <a class="dropdown-item" [routerLink]="'/dashboard/settings'">
-              <!--"Settings" | i18nextFormat-->Settings</a
+              {{ "Settings" | i18nextFormat }}</a
             >
             <a class="dropdown-item cp" (click)="logout($event)">
-              <!--"Logout" | i18nextFormat-->Logout</a
+              {{ "Logout" | i18nextFormat }}</a
             >
           </div>
         </div>

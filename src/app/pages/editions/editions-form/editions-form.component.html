@@ -7,7 +7,7 @@
   <div class="p-3" style="border: 2px solid #f7f7f9;">
     <div class="form-group row">
       <label for="title" class="col-sm-2 col-form-label">
-        <!--{{ "Title" | i18nextFormat }}-->Title
+        {{ "Title" | i18nextFormat }}
       </label>
       <div class="col-sm-10">
         <input
@@ -24,15 +24,14 @@
             (form.controls['title'].dirty || form.controls['title'].touched)
           "
         >
-          <!--{{ "This field is required" | i18nextFormat }}-->This field is
-          required
+          {{ "This field is required" | i18nextFormat }}
         </div>
       </div>
     </div>
 
     <div class="form-group row">
       <label for="author" class="col-sm-2 col-form-label">
-        <!--{{ "Author" | i18nextFormat }}-->Author
+        {{ "Author" | i18nextFormat }}
       </label>
       <div class="col-sm-10">
         <input
@@ -49,15 +48,14 @@
             (form.controls['author'].dirty || form.controls['author'].touched)
           "
         >
-          <!--{{ "This field is required" | i18nextFormat }}-->This field is
-          required
+          {{ "This field is required" | i18nextFormat }}
         </div>
       </div>
     </div>
 
     <div class="form-group row">
       <label for="post" class="col-sm-2 col-form-label">
-        <!--{{"Post" | i18nextFormat}}-->Post</label
+        {{ "Post" | i18nextFormat }}</label
       >
       <div class="col-sm-10">
         <textarea
@@ -74,15 +72,14 @@
             (form.controls['post'].dirty || form.controls['post'].touched)
           "
         >
-          <!--{{ "This field is required" | i18nextFormat }}-->This field is
-          required
+          {{ "This field is required" | i18nextFormat }}
         </div>
       </div>
     </div>
 
     <div class="form-group row">
       <label for="image" class="col-sm-2 col-form-label">
-        <!--{{ "Image" | i18nextFormat }}-->Image
+        {{ "Image" | i18nextFormat }}
       </label>
       <div class="col-sm-10">
         <button
@@ -90,19 +87,19 @@
           class="btn btn-primary btn-sm"
           (click)="showImageSelectModal(imageTemplate)"
         >
-          <!--{{ "Select Image" | i18nextFormat }}-->Select Image
+          {{ "Select Image" | i18nextFormat }}
         </button>
         <div>
           <table class="table w-100">
             <tbody>
               <tr *ngFor="let img of image">
                 <div class="image">
-                  <img
-                    [hidden]="!img.url"
-                    [src]="getImageUrl(img.url)"
-                    alt="portfolio"
-                    style="width: auto; height: 170px;"
-                  />
+                  <cl-image [public-id]="img">
+                    <cl-transformation
+                      height="170"
+                      crop="scale"
+                    ></cl-transformation>
+                  </cl-image>
                 </div>
                 <td class="text-right">
                   <button
@@ -116,7 +113,7 @@
               </tr>
               <tr *ngIf="!image.length">
                 <td colspan="5" class="text-center my-5">
-                  <!--{{ "No Images Found" | i18nextFormat }}-->No Images Found
+                  {{ "No Images Found" | i18nextFormat }}
                 </td>
               </tr>
             </tbody>
@@ -134,13 +131,13 @@
 
   <div class="form-group mt-3">
     <button *ngIf="isCreate" class="btn btn-primary">
-      <!--{{ "Create" | i18nextFormat }}-->Create
+      {{ "Create" | i18nextFormat }}
     </button>
     <button *ngIf="!isCreate" class="btn btn-success">
-      <!--{{ "Update" | i18nextFormat }}-->Update
+      {{ "Update" | i18nextFormat }}
     </button>
     <a [routerLink]="['../']" class="btn btn-default ml-3">
-      <!--{{ "Cancel" | i18nextFormat }}-->Cancel
+      {{ "Cancel" | i18nextFormat }}
     </a>
   </div>
 </form>
@@ -148,7 +145,7 @@
 <ng-template #imageTemplate>
   <div class="modal-header">
     <h4 class="modal-title pull-left">
-      <!--{{"Select Image" | i18nextFormat }}-->Select Image
+      {{ "Select Image" | i18nextFormat }}
     </h4>
     <button
       type="button"
@@ -172,12 +169,14 @@
         <tbody>
           <tr *ngFor="let image of images">
             <div class="image" style="max-width: 100%">
-              <img
-                [hidden]="!image.url"
-                [src]="getImageUrl(image.url)"
-                alt="portfolio"
-                style="max-width: 100%; height: 170px;"
-              />
+              <cl-image loading="lazy" public-id="{{ image.public_id }}">
+                <cl-placeholder type="blur"></cl-placeholder>
+                <cl-transformation
+                  height="170"
+                  width="128"
+                  crop="lfill"
+                ></cl-transformation>
+              </cl-image>
             </div>
             <!-- <td>
                             {{getImageUrl(image.weblinkUrl)}}
@@ -195,7 +194,7 @@
           </tr>
           <tr *ngIf="!images.length">
             <td colspan="5" class="text-center my-5">
-              <!--{{"No Images Found" | i18nextFormat}}-->No Images Found
+              {{ "No Images Found" | i18nextFormat }}
             </td>
           </tr>
         </tbody>

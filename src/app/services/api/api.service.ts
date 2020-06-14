@@ -1,104 +1,115 @@
 /**
  * Created by Tall Prince on 5/26/2017.
  */
-import { Injectable } from '@angular/core';
-import { Http, Headers, URLSearchParams } from '@angular/http';
-import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { Observable, throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
+import { Router } from "@angular/router";
 
-import { environment as ENV } from '../../../environments/environment';
-import { SettingsService } from '../settings/settings.service';
+import { environment as ENV } from "../../../environments/environment";
+import { SettingsService } from "../settings/settings.service";
 
 @Injectable()
 export class Api {
   public apiUrl = ENV.apiUrl;
 
   constructor(
-    public http: Http,
+    public http: HttpClient,
     private router: Router,
     protected settings: SettingsService
   ) {}
 
-  createAuthorizationHeader(headers: Headers) {
-    headers.append('Authorization', 'Basic '+this.settings.getStorage('token'));
+  createAuthorizationHeader(headers: HttpHeaders) {
+    headers.append(
+      "Authorization",
+      "Basic " + this.settings.getStorage("token")
+    );
   }
 
-  get(url, data?) {
-    let headers = new Headers();
+  get(url, data?): Observable<any> {
+    const headers = new HttpHeaders();
     this.createAuthorizationHeader(headers);
 
-    let params: URLSearchParams = new URLSearchParams();
+    let params: HttpParams = new HttpParams();
     if (data) {
-      for (var key in data) {
-        params.set(key, data[key]);
+      for (const key in data) {
+        params = params.append(key, data[key]);
       }
     }
 
     return this.http
       .get(this.apiUrl + url, {
         headers: headers,
-        search: params
+        params: params
       })
-      .map(res => res.json())
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
   }
 
-  post(url, data) {
-    let headers = new Headers();
+  post(url, data): Observable<any> {
+    const headers = new HttpHeaders();
     this.createAuthorizationHeader(headers);
-    headers.append('withCredentials','false')
+    headers.append("withCredentials", "false");
 
     return this.http
       .post(this.apiUrl + url, data, {
         headers: headers
       })
-      .map(res => res.json())
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
   }
 
-  put(url, data) {
-    let headers = new Headers();
+  put(url, data): Observable<any> {
+    const headers = new HttpHeaders();
     this.createAuthorizationHeader(headers);
 
     return this.http
       .put(this.apiUrl + url, data, {
         headers: headers
       })
-      .map(res => res.json())
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
   }
 
-  patch(url, data) {
-    let headers = new Headers();
+  patch(url, data): Observable<any> {
+    const headers = new HttpHeaders();
     this.createAuthorizationHeader(headers);
 
     return this.http
       .patch(this.apiUrl + url, data, {
         headers: headers
       })
-      .map(res => res.json())
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
   }
 
-  delete(url) {
-    let headers = new Headers();
+  delete(url): Observable<any> {
+    const headers = new HttpHeaders();
     this.createAuthorizationHeader(headers);
 
     return this.http
       .delete(this.apiUrl + url, {
         headers: headers
       })
-      .map(res => res.json())
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
   }
 
   protected handleError(error: any) {
-    if (error.status == 401 && error.url && !error.url.endsWith('/login')) {
-      if (this.settings) this.settings.clearSetting();
-      document.location.href = '/';
+    if (error.status == 401 && error.url && !error.url.endsWith("/login")) {
+      if (this.settings) {
+        this.settings.clearSetting();
+      }
+      document.location.href = "/";
     }
-    // In a real world app, you might use a remote logging infrastructure
 
-    return Observable.throw(error);
+    if (error.error instanceof ErrorEvent) {
+      // A client side or network error occurred. Handle it accordingly
+      console.error("An error occurred:", JSON.stringify(error.error));
+    } else {
+      console.error(
+        `Backend returned code ${error.status}, body was: ${JSON.stringify(
+          error.error
+        )}`
+      );
+    }
+
+    return throwError("Something went wrong, please try again later");
   }
 }

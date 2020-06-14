@@ -1,10 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators
-} from "@angular/forms";
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ToasterService, ToasterConfig } from "angular2-toaster";
 

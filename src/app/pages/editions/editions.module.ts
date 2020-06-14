@@ -9,6 +9,11 @@ import { EditionsFormComponent } from "./editions-form/editions-form.component";
 import { ListComponent } from "./list/list.component";
 import { CreateComponent } from "./create/create.component";
 import { EditComponent } from "./edit/edit.component";
+import {
+  CloudinaryModule,
+  CloudinaryConfiguration
+} from "@cloudinary/angular-5.x";
+import { Cloudinary } from "cloudinary-core";
 
 const routes: Routes = [
   { path: "", component: ListComponent },
@@ -23,7 +28,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [SharedModule, RouterModule.forChild(routes)],
+  imports: [
+    SharedModule,
+    CloudinaryModule.forRoot({ Cloudinary }, {
+      cloud_name: "schneckenhof",
+      secure: true
+    } as CloudinaryConfiguration),
+    RouterModule.forChild(routes)
+  ],
   declarations: [
     EditionsFormComponent,
     ListComponent,

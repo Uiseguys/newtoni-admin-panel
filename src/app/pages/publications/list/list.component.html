@@ -2,25 +2,27 @@
   <h3 class="mt-4">
     <span class="text-capitalize">
       <a [routerLink]="['./create']" class="ml-2 btn btn-primary btn-sm">
-        <!--{{ "New Publication" | i18nextFormat }}-->New Publication
+        {{ "New Publication" | i18nextFormat }}
       </a>
     </span>
   </h3>
 
   <div *ngIf="publications && !publications.length" class="text-center mt-5">
-    <!--{{ "No Publication Found" | i18nextFormat }}-->No Publication Found
+    {{ "No Publication Found" | i18nextFormat }}
   </div>
 
   <div class="publication-list clearfix">
     <div *ngFor="let publication of publications" class="float-left m-2">
       <div class="c-publication">
         <div class="image">
-          <img
-            [hidden]="!publication.image"
-            [src]="getImageUrl(publication.image)"
-            alt="portfolio"
-            style="max-width: 100%"
-          />
+          <cl-image
+            *ngIf="publication.image"
+            loading="lazy"
+            public-id="{{ publication.image[0] }}"
+          >
+            <cl-placeholder type="blur"></cl-placeholder>
+            <cl-transformation width="auto" crop="scale"></cl-transformation>
+          </cl-image>
         </div>
         <div class="description">
           <h4 class="item_name">{{ publication.name }}</h4>
@@ -37,7 +39,10 @@
         >
           <i class="fa fa-edit"></i>
         </a>
-        <a class="text-danger cp ml-3" (click)="deletePublication(publication.id)">
+        <a
+          class="text-danger cp ml-3"
+          (click)="deletePublication(publication.id)"
+        >
           <i class="fa fa-trash"></i>
         </a>
       </div>

@@ -10,12 +10,15 @@ import {
   ViewEncapsulation
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { FileUploader } from "ng2-file-upload";
+import {
+  FileUploader,
+  FileUploaderOptions,
+  ParsedResponseHeaders
+} from "ng2-file-upload";
 import { uniqBy } from "lodash";
-
 import { SettingsService } from "../../services/settings/settings.service";
 
-declare var $: any;
+declare let $: any;
 
 @Component({
   selector: "attach-uploader",
@@ -24,12 +27,13 @@ declare var $: any;
   encapsulation: ViewEncapsulation.None
 })
 export class AttachUploader implements OnInit {
-  token: string = "";
   uploader: FileUploader;
   elem: HTMLElement;
 
-  @Input("mimeTypes") mimeTypes: any = [];
-  @Input("validate") validate: any;
+  @Input()
+  mimeTypes: any = [];
+  validate: any;
+  responses: Array<any>;
 
   @Output() onChange: EventEmitter<any> = new EventEmitter();
 
@@ -39,7 +43,7 @@ export class AttachUploader implements OnInit {
     private settings: SettingsService,
     public zone: NgZone
   ) {
-    //this.token = this.settings.getStorage("token", "");
+    this.responses = [];
   }
 
   ngOnInit() {
@@ -102,7 +106,7 @@ export class AttachUploader implements OnInit {
     this.route.params.subscribe(params => {
       this.uploader.setOptions({
         // url: this.settings.API_URL + `/resources/${params.type}/upload`,
-        url: this.settings.API_URL + `/resources/upload/`,
+        url: this.settings.API_URL + "/resources/upload",
         authToken: this.settings.getStorage("token"),
         allowedMimeType: this.mimeTypes
       });

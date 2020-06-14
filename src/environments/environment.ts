@@ -11,8 +11,8 @@
 // };
 export const environment = {
   production: false,
-  siteUrl: "https://newtoni-admin.netlify.com",
-  apiUrl: "https://newtoni-api.herokuapp.com",
+  siteUrl: "",
+  apiUrl: "http://localhost:3000",
   pdfUrl: "https://www.pdf-aas.io"
 };
 

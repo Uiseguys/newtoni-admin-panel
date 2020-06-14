@@ -1,27 +1,23 @@
-import {
-  Component,
-  Inject,
-  OnInit,
-  OnDestroy,
-  ViewEncapsulation
-} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ToasterConfig, ToasterService } from "angular2-toaster";
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 
 import { SettingsService as ConfigService } from "../../services/settings/settings.service";
+import { forkJoin, timer } from "rxjs";
+import { catchError, map, flatMap, takeWhile } from "rxjs/operators";
 import { ClientApiService } from "../../services/api/clientapi.service";
 import { SettingService } from "../../pages/setting/setting.service";
 import { GoTrueJs } from "../../services/netlify/gotrue-js.service";
 
-declare var $: any;
+declare let $: any;
 
 @Component({
   selector: "app-dashboardlayout",
   templateUrl: "./dashboardlayout.component.html",
   styleUrls: ["./dashboardlayout.component.scss"]
 })
-export class DashboardLayoutComponent implements OnInit, OnDestroy {
+export class DashboardLayoutComponent implements OnInit {
   toasterconfig = new ToasterConfig({
     showCloseButton: false,
     tapToDismiss: false,
@@ -33,7 +29,7 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy {
   timer: any = null;
 
   constructor(
-    public http: Http,
+    public http: HttpClient,
     private router: Router,
     private toasterService: ToasterService,
     private config: ConfigService,
@@ -48,62 +44,13 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // this.toasterService.popAsync('error', '', 'asddddddd');
     this.settingApi.getAll().subscribe(res => {
-      const item = res.find(item => item.key === "settings");
+      const item = res.find(settings => settings.key === "settings");
+      const netlifyHook = res.find(settings => settings.key === "netlifyHook");
       this.config.setAppSetting("settings", item ? item.value : {});
-      const hook = res.find(item => item.key === "netlifyHook");
-      if (hook && hook.value.state === "building") {
-        this.startWatch();
+      if (netlifyHook) {
+        this.settingApi.deleteSetting(netlifyHook.id).subscribe(_ => null);
       }
     });
-
-    this.settingApi.getSetting("netlifyHook").subscribe(res => {
-      if (res.length)
-        this.settingApi.deleteSetting(res[0].id).subscribe(res => {});
-    });
-  }
-
-  ngOnDestroy() {
-    this.stopWatch();
-  }
-
-  startWatch() {
-    if (this.timer) return;
-    this.timer = setInterval(() => {
-      this.settingApi.getSetting("netlifyHook").subscribe(res => {
-        if (!res.length) return;
-
-        const detail = res[0].value;
-
-        if (detail.state === "ready") {
-          this.stopWatch();
-          window.open(detail.url, "_blank");
-          this.settingApi.deleteSetting(res[0].id).subscribe(res => {});
-        } else if (detail.state === "failed") {
-          this.stopWatch();
-          this.toasterService.popAsync(
-            "error",
-            "",
-            "Sorry. Building has been failed"
-          );
-          this.settingApi.deleteSetting(res[0].id).subscribe(res => {});
-        } else {
-          this.stopWatch();
-          this.toasterService.popAsync(
-            "error",
-            "",
-            "Sorry. Building has been failed"
-          );
-          this.settingApi.deleteSetting(res[0].id).subscribe(res => {});
-        }
-      });
-    }, 3500);
-  }
-
-  stopWatch() {
-    if (!this.timer) return;
-
-    clearInterval(this.timer);
-    this.timer = null;
   }
 
   logout($event) {
@@ -118,6 +65,7 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy {
   }
 
   triggerHook(isLive) {
+    this.timer = true;
     const settings = this.config.getAppSetting("settings") || {};
     const url = isLive ? settings.liveBuildHook : settings.previewBuildHook;
 
@@ -137,13 +85,46 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.http.post(url, {}).subscribe(
-      res => {
-        this.startWatch();
-      },
-      err => {
-        this.toasterService.popAsync("error", "", "Sorry. Something is wrong");
-      }
-    );
+    const errorHandler = err =>
+      this.toasterService.popAsync("error", "", "Sorry. Something is wrong");
+
+    const netlifyHook$ = () =>
+      this.settingApi
+        .getAll()
+        .pipe(map(val => val.find(item => item.key == "netlifyHook")));
+
+    const getNetlifyHook$ = () =>
+      timer(5000, 1000).pipe(
+        flatMap(netlifyHook$),
+        takeWhile(
+          val => (val ? val["value"]["state"] === "building" : false),
+          true
+        )
+      );
+
+    forkJoin(this.http.post(url, {}), getNetlifyHook$())
+      .pipe(catchError(errorHandler))
+      .subscribe(([_, res2]: any) => {
+        if (res2) {
+          if (res2["value"]["state"] === "ready") {
+            window.open(res2["value"]["ssl_url"], "_blank");
+            this.settingApi.deleteSetting(res2["id"]).subscribe(_ => null);
+          } else {
+            this.toasterService.popAsync(
+              "error",
+              "",
+              "Sorry. Building has failed"
+            );
+            this.settingApi.deleteSetting(res2["id"]).subscribe(_ => null);
+          }
+        } else {
+          this.toasterService.popAsync(
+            "error",
+            "",
+            "Sorry, something went wrong, try again later"
+          );
+        }
+        this.timer = null;
+      });
   }
 }

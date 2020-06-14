@@ -1,25 +1,26 @@
 <div class="container" *ngIf="validUrl">
   <h3 class="mt-4">
     <a [routerLink]="['./create']" class="ml-2 btn btn-primary btn-sm">
-      <!--{{ "New News" | i18nextFormat }}-->
-      New News</a
-    >
+      {{ "New News" | i18nextFormat }}
+    </a>
   </h3>
 
   <div *ngIf="news && !news.length" class="text-center mt-5">
-    <!--{{"No News Found" | i18nextFormat}}-->No News Found
+    {{ "No News Found" | i18nextFormat }}
   </div>
 
   <div class="news-list clearfix">
     <div *ngFor="let news of news" class="float-left m-2">
       <div class="c-news">
         <div class="image">
-          <img
-            [hidden]="!news.image"
-            [src]="getImageUrl(news.image)"
-            alt="portfolio"
-            style="max-width: 100%"
-          />
+          <cl-image
+            *ngIf="news.image"
+            loading="lazy"
+            public-id="{{ news.image[0] }}"
+          >
+            <cl-placeholder type="blur"></cl-placeholder>
+            <cl-transformation width="auto" crop="scale"></cl-transformation>
+          </cl-image>
         </div>
         <div class="description">
           <h4 class="item_name">{{ news.title }}</h4>

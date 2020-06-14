@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from "@angular/core";
 import { ToasterService } from "angular2-toaster";
 
-import { ClientApiService } from "../../../services/api/clientapi.service";
 import { SettingsService as ConfigService } from "../../../services/settings/settings.service";
 import { SettingService } from "../setting.service";
 
-declare var $: any;
+declare let $: any;
 
 @Component({
   selector: "app-setting-page",
@@ -33,20 +32,20 @@ export class SettingPage implements OnInit, OnDestroy {
     this.api.getAll().subscribe(res => {
       let item;
       item = res.find(item => item.key === "settings");
-      this.settings = item ? item.value : {};
+      this.settings = item ? item.value : Object.create(null);
 
       item = res.find(item => item.key === "email");
-      this.emailSetting = item ? item.value : {};
+      this.emailSetting = item ? item.value : Object.create(null);
 
       item = res.find(item => item.key === "newsletter");
-      this.newsletterSetting = item ? item.value : {};
+      this.newsletterSetting = item ? item.value : Object.create(null);
     });
   }
 
   ngOnDestroy() {}
 
   updateNetlifySetting() {
-    this.api.updateSetting("settings", this.settings).subscribe(res => {
+    this.api.updateSetting("settings", this.settings).subscribe(_ => {
       this.toasterService.popAsync(
         "success",
         "",
@@ -57,12 +56,11 @@ export class SettingPage implements OnInit, OnDestroy {
   }
 
   updateEmailSetting() {
-    this.api.updateSetting("email", this.emailSetting).subscribe(res => {
-      console.log(this.settings);
+    this.api.updateSetting("email", this.emailSetting).subscribe(_ => {
       this.toasterService.popAsync(
         "success",
         "",
-        "Email Address Settings have been updated"
+        "Email Settings have been updated"
       );
       this.config.setAppSetting("email", this.emailSetting);
     });
@@ -71,7 +69,7 @@ export class SettingPage implements OnInit, OnDestroy {
   updateNewsletterSetting() {
     this.api
       .updateSetting("newsletter", this.newsletterSetting)
-      .subscribe(res => {
+      .subscribe(_ => {
         this.toasterService.popAsync(
           "success",
           "",
