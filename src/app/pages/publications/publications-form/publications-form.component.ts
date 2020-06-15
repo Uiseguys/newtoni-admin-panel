@@ -25,6 +25,12 @@ import { BsModalService } from "ngx-bootstrap/modal";
   styleUrls: ["./publications-form.component.css"]
 })
 export class PublicationsFormComponent implements OnInit, OnChanges {
+  @Input("isCreate") isCreate: boolean = true;
+  @Input("initialValue") initialValue: any = {};
+
+  @Output() onSubmit: EventEmitter<any> = new EventEmitter();
+
+  description: string | null;
   form: FormGroup;
   error = "";
   packagings = [];
@@ -32,11 +38,6 @@ export class PublicationsFormComponent implements OnInit, OnChanges {
   images = [];
 
   modalRef: any;
-
-  @Input("isCreate") isCreate: boolean = true;
-  @Input("initialValue") initialValue: any = {};
-
-  @Output() onSubmit: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private fb: FormBuilder,
@@ -79,6 +80,7 @@ export class PublicationsFormComponent implements OnInit, OnChanges {
           this.form.controls[key].setValue(this.initialValue[key]);
         }
       });
+      this.description = this.initialValue.description;
       this.image = this.initialValue.image;
     }
   }
@@ -86,6 +88,7 @@ export class PublicationsFormComponent implements OnInit, OnChanges {
   handleSubmit($event) {
     $event.preventDefault();
 
+    this.form.controls["description"].setValue(this.description);
     for (let c in this.form.controls) {
       this.form.controls[c].markAsTouched();
     }

@@ -9,6 +9,7 @@ import { PublicationsFormComponent } from "./publications-form/publications-form
 import { ListComponent } from "./list/list.component";
 import { CreateComponent } from "./create/create.component";
 import { EditComponent } from "./edit/edit.component";
+import { QuillModule } from "ngx-quill";
 import {
   CloudinaryModule,
   CloudinaryConfiguration
@@ -29,6 +30,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    QuillModule.forRoot(),
     SharedModule,
     CloudinaryModule.forRoot({ Cloudinary }, {
       cloud_name: "schneckenhof",
