@@ -22,20 +22,21 @@ import { BsModalService } from "ngx-bootstrap/modal";
 @Component({
   selector: "app-news-form",
   templateUrl: "./news-form.component.html",
-  styleUrls: ["./news-form.component.css"]
+  styleUrls: ["./news-form.component.scss"]
 })
 export class NewsFormComponent implements OnInit, OnChanges {
+  @Input("isCreate") isCreate: boolean = true;
+  @Input("initialValue") initialValue: any = {};
+
+  @Output() onSubmit: EventEmitter<any> = new EventEmitter();
+
+  post: string | null;
   form: FormGroup;
   error = "";
   image = [];
   images = [];
 
   modalRef: any;
-
-  @Input("isCreate") isCreate: boolean = true;
-  @Input("initialValue") initialValue: any = {};
-
-  @Output() onSubmit: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private fb: FormBuilder,
@@ -72,12 +73,14 @@ export class NewsFormComponent implements OnInit, OnChanges {
         }
       });
       this.image = this.initialValue.image;
+      this.post = this.initialValue.post;
     }
   }
 
   handleSubmit($event) {
     $event.preventDefault();
 
+    this.form.controls["post"].setValue(this.post);
     for (let c in this.form.controls) {
       this.form.controls[c].markAsTouched();
     }

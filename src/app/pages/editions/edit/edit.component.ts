@@ -33,11 +33,7 @@ export class EditComponent implements OnInit {
   handleSubmit(values) {
     this.api.updateEdition(this.edition.id, values).subscribe(
       res => {
-        this.toasterService.popAsync(
-          "success",
-          "",
-          "Publication has been updated"
-        );
+        this.toasterService.popAsync("success", "", "Edition has been updated");
         this.router.navigate(["/dashboard/editions"]);
       },
       res => {
@@ -51,4 +47,3 @@ export class EditComponent implements OnInit {
     );
   }
 }
-

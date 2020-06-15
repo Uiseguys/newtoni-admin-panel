@@ -58,13 +58,11 @@
         {{ "Post" | i18nextFormat }}</label
       >
       <div class="col-sm-10">
-        <textarea
-          type="text"
-          class="form-control"
-          id="post"
-          formControlName="post"
-          autocomplete="off"
-        ></textarea>
+        <quill-editor
+          [spellcheck]="true"
+          [(ngModel)]="post"
+          [ngModelOptions]="{ standalone: true }"
+        ></quill-editor>
         <div
           class="text-danger"
           *ngIf="

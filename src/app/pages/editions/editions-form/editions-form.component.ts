@@ -25,17 +25,18 @@ import { BsModalService } from "ngx-bootstrap/modal";
   styleUrls: ["./editions-form.component.css"]
 })
 export class EditionsFormComponent implements OnInit, OnChanges {
+  @Input("isCreate") isCreate: boolean = true;
+  @Input("initialValue") initialValue: any = {};
+
+  @Output() onSubmit: EventEmitter<any> = new EventEmitter();
+
+  post: string | null;
   form: FormGroup;
   error = "";
   image = [];
   images = [];
 
   modalRef: any;
-
-  @Input("isCreate") isCreate: boolean = true;
-  @Input("initialValue") initialValue: any = {};
-
-  @Output() onSubmit: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private fb: FormBuilder,
@@ -71,6 +72,7 @@ export class EditionsFormComponent implements OnInit, OnChanges {
           this.form.controls[key].setValue(this.initialValue[key]);
         }
       });
+      this.post = this.initialValue.post;
       this.image = this.initialValue.image;
     }
   }
@@ -78,6 +80,7 @@ export class EditionsFormComponent implements OnInit, OnChanges {
   handleSubmit($event) {
     $event.preventDefault();
 
+    this.form.controls["post"].setValue(this.post);
     for (let c in this.form.controls) {
       this.form.controls[c].markAsTouched();
     }
@@ -102,7 +105,6 @@ export class EditionsFormComponent implements OnInit, OnChanges {
   selectImage(selectedImage, $event) {
     $event.preventDefault();
     this.image.push(selectedImage.public_id);
-    console.log(this.image);
     this.modalRef.hide();
   }
 
@@ -110,6 +112,5 @@ export class EditionsFormComponent implements OnInit, OnChanges {
     if (!confirm("Are you sure to delete")) return;
     const index = this.image.indexOf(image);
     this.image.splice(index, 1);
-    console.log(this.image);
   }
 }
