@@ -15,14 +15,12 @@
     <div *ngFor="let publication of publications" class="float-left m-2">
       <div class="c-publication">
         <div class="image">
-          <cl-image
-            *ngIf="publication.image"
-            loading="lazy"
-            public-id="{{ publication.image[0] }}"
-          >
-            <cl-placeholder type="blur"></cl-placeholder>
-            <cl-transformation width="auto" crop="scale"></cl-transformation>
-          </cl-image>
+          <div *ngIf="publication.image.length > 0">
+            <cl-image loading="lazy" public-id="{{ publication.image[0] }}">
+              <cl-placeholder type="blur"></cl-placeholder>
+              <cl-transformation width="auto" crop="scale"></cl-transformation>
+            </cl-image>
+          </div>
         </div>
         <div class="description">
           <h4 class="item_name">{{ publication.name }}</h4>

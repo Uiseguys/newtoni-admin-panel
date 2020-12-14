@@ -18,7 +18,7 @@ export class ImagePage implements OnInit {
   images: any;
 
   pageConfig = {
-    itemsPerPage: 50,
+    itemsPerPage: 500,
     currentPage: 1,
     totalItems: 1
   };

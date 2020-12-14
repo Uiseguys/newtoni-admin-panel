@@ -15,4 +15,3 @@ export const environment = {
   apiUrl: "http://localhost:3000",
   pdfUrl: "https://www.pdf-aas.io"
 };
-

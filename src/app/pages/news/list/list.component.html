@@ -13,14 +13,12 @@
     <div *ngFor="let news of news" class="float-left m-2">
       <div class="c-news">
         <div class="image">
-          <cl-image
-            *ngIf="news.image"
-            loading="lazy"
-            public-id="{{ news.image[0] }}"
-          >
-            <cl-placeholder type="blur"></cl-placeholder>
-            <cl-transformation width="auto" crop="scale"></cl-transformation>
-          </cl-image>
+          <div *ngIf="news.image.length > 0">
+            <cl-image loading="lazy" public-id="{{ news.image[0] }}">
+              <cl-placeholder type="blur"></cl-placeholder>
+              <cl-transformation width="auto" crop="scale"></cl-transformation>
+            </cl-image>
+          </div>
         </div>
         <div class="description">
           <h4 class="item_name">{{ news.title }}</h4>
