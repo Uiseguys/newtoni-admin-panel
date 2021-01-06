@@ -31,11 +31,6 @@ export class EditComponent implements OnInit {
   ngOnInit() {}
 
   handleSubmit(values) {
-    if (parseInt(values.availability)) {
-      values.availability = true;
-    } else {
-      values.availability = false;
-    }
     if (values.content) {
       values.content = 1;
     } else {
@@ -47,8 +42,6 @@ export class EditComponent implements OnInit {
     if (!values.no) {
       values.no = 0;
     }
-    const d = new Date();
-    values.update_time = d.toISOString();
     this.api.updatePublication(this.publication.id, values).subscribe(
       res => {
         this.toasterService.popAsync(

@@ -47,8 +47,16 @@ export class EditionsFormComponent implements OnInit, OnChanges {
     this.form = fb.group({
       title: ["", Validators.compose([Validators.required])],
       author: ["", Validators.compose([Validators.required])],
-      post: ["", Validators.compose([Validators.required])]
+      post: ["", Validators.compose([Validators.required])],
+      price: ["", Validators.compose([Validators.required])],
+      availability: [""],
+      content: [""],
+      priority: [""],
+      no: [""]
     });
+
+    this.form.controls.availability.setValue(true);
+    this.form.controls.priority.setValue(0);
   }
 
   ngOnInit() {
@@ -64,13 +72,7 @@ export class EditionsFormComponent implements OnInit, OnChanges {
       changes.initialValue.previousValue.id !== this.initialValue.id
     ) {
       Object.keys(this.form.controls).forEach(key => {
-        if (this.initialValue[key] === true) {
-          this.form.controls[key].setValue(1);
-        } else if (this.initialValue[key] === false) {
-          this.form.controls[key].setValue(0);
-        } else {
-          this.form.controls[key].setValue(this.initialValue[key]);
-        }
+        this.form.controls[key].setValue(this.initialValue[key]);
       });
       this.post = this.initialValue.post;
       this.image = this.initialValue.image;
@@ -88,6 +90,7 @@ export class EditionsFormComponent implements OnInit, OnChanges {
       this.form.value.vintage = 0;
     }
     if (!this.form.valid) return;
+    //console.log(this.form.value);
     this.onSubmit.emit({
       ...this.form.value,
       image: JSON.stringify(this.image)

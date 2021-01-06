@@ -55,7 +55,7 @@ export class PublicationsFormComponent implements OnInit, OnChanges {
       description: [""]
     });
 
-    this.form.controls.availability.setValue(1);
+    this.form.controls.availability.setValue(true);
     this.form.controls.priority.setValue(0);
   }
 
@@ -72,13 +72,7 @@ export class PublicationsFormComponent implements OnInit, OnChanges {
       changes.initialValue.previousValue.id !== this.initialValue.id
     ) {
       Object.keys(this.form.controls).forEach(key => {
-        if (this.initialValue[key] === true) {
-          this.form.controls[key].setValue(1);
-        } else if (this.initialValue[key] === false) {
-          this.form.controls[key].setValue(0);
-        } else {
-          this.form.controls[key].setValue(this.initialValue[key]);
-        }
+        this.form.controls[key].setValue(this.initialValue[key]);
       });
       this.description = this.initialValue.description;
       this.image = this.initialValue.image;
@@ -113,7 +107,6 @@ export class PublicationsFormComponent implements OnInit, OnChanges {
   selectImage(selectedImage, $event) {
     $event.preventDefault();
     this.image.push(selectedImage.public_id);
-    console.log(this.image);
     this.modalRef.hide();
   }
 

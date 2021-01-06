@@ -19,11 +19,6 @@ export class CreateComponent implements OnInit {
   ngOnInit() {}
 
   handleSubmit = values => {
-    if (parseInt(values.availability)) {
-      values.availability = true;
-    } else {
-      values.availability = false;
-    }
     if (values.content) {
       values.content = 1;
     } else {
